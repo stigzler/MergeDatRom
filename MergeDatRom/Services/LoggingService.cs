@@ -9,6 +9,21 @@ namespace MergeDatRom.Services
         private static readonly string LogPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "log.txt");
         private static readonly object LockObject = new object();
 
+        public void LogClear()
+        {
+            try
+            {
+                lock (LockObject)
+                {
+                    File.WriteAllText(LogPath, string.Empty, Encoding.UTF8);
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Failed to clear log file: {ex.Message}");
+            }
+        }
+
         public void Log(string message)
         {
             try

@@ -12,10 +12,27 @@ namespace MergeDatRom.Services
             _loggingService = loggingService;
         }
 
-        internal BindingList<DatMetadata> GetDatMetadata()
+        internal BindingList<DatMetadata> GetDatMetadata(List<string> datFilePaths)
         {
             _loggingService.Log("Loading DAT metadata.");
-            return new BindingList<DatMetadata>();
+
+            BindingList<DatMetadata> datMetadataList = new BindingList<DatMetadata>();
+
+            foreach (string datFilePath in datFilePaths)
+            {
+                try
+                {
+                    DatMetadata datMetadata = new DatMetadata(datFilePath);
+                    datMetadataList.Add(datMetadata);
+                    _loggingService.Log("Loaded DAT metadata from: " + datFilePath);
+                }
+                catch (Exception ex)
+                {
+                    _loggingService.Log($"ERROR loading DAT metadata from '{datFilePath}': {ex.Message}");
+                }
+            }
+
+            return datMetadataList;
         }
     }
 }
