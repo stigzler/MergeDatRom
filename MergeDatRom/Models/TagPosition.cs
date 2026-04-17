@@ -7,7 +7,7 @@ namespace MergeDatRom.Models
 {
     internal enum TagPosition
     {
-        Prefix,
-        Suffix
+        Suffix,
+        Prefix
     }
 }

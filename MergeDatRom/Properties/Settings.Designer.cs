@@ -34,5 +34,89 @@ namespace MergeDatRom.Properties {
                 this["LastChosenDatDir"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string DefaultName {
+            get {
+                return ((string)(this["DefaultName"]));
+            }
+            set {
+                this["DefaultName"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string DefaultDesc {
+            get {
+                return ((string)(this["DefaultDesc"]));
+            }
+            set {
+                this["DefaultDesc"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string DefaultAuthor {
+            get {
+                return ((string)(this["DefaultAuthor"]));
+            }
+            set {
+                this["DefaultAuthor"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string DefaultCategory {
+            get {
+                return ((string)(this["DefaultCategory"]));
+            }
+            set {
+                this["DefaultCategory"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool DefaultAlsoTagDesc {
+            get {
+                return ((bool)(this["DefaultAlsoTagDesc"]));
+            }
+            set {
+                this["DefaultAlsoTagDesc"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string LastChosenSaveDir {
+            get {
+                return ((string)(this["LastChosenSaveDir"]));
+            }
+            set {
+                this["LastChosenSaveDir"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool OPenFileAfterCreated {
+            get {
+                return ((bool)(this["OPenFileAfterCreated"]));
+            }
+            set {
+                this["OPenFileAfterCreated"] = value;
+            }
+        }
     }
 }

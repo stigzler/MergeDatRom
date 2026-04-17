@@ -38,7 +38,12 @@ namespace MergeDatRom.Models
         {
             if (!File.Exists(DatFilePath)) return;
 
-            using (XmlReader reader = XmlReader.Create(DatFilePath))
+            var settings = new XmlReaderSettings
+            {
+                DtdProcessing = DtdProcessing.Ignore
+            };
+
+            using (XmlReader reader = XmlReader.Create(DatFilePath, settings))
             {
                 while (reader.Read())
                 {

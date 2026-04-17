@@ -7,13 +7,13 @@ namespace MergeDatRom.Models
 {
     internal enum MergeType
     {
-        [Description("Priority Only")]
-        PriorityOnly,
+        [Description("Tag all")]
+        TagAll,
 
         [Description("Tag all but Priority")]
         TagAllButPriority,
 
-        [Description("Tag all")]
-        TagAll,
+        [Description("Priority Only")]
+        PriorityOnly,
     }
 }
