@@ -33,6 +33,7 @@
             MainMS = new stigzler.Winforms.Base.UIElements.MenuStrip();
             viewToolStripMenuItem = new ToolStripMenuItem();
             darkModeToolStripMenuItem = new ToolStripMenuItem();
+            VersionLB = new stigzler.Winforms.Base.ToolStripElements.Label();
             MainSC = new SplitContainer();
             ListboxPN = new stigzler.Winforms.Base.UIElements.Panel();
             MainLB = new stigzler.Winforms.Base.UIElements.ListBox();
@@ -85,11 +86,11 @@
             // 
             MainMS.BackColor = Color.FromArgb(25, 25, 25);
             MainMS.ForeColor = Color.FromArgb(220, 220, 220);
-            MainMS.Items.AddRange(new ToolStripItem[] { viewToolStripMenuItem });
-            MainMS.Location = new Point(5, 5);
+            MainMS.Items.AddRange(new ToolStripItem[] { viewToolStripMenuItem, VersionLB });
+            MainMS.Location = new Point(4, 4);
             MainMS.Name = "MainMS";
             MainMS.ShowItemToolTips = true;
-            MainMS.Size = new Size(674, 25);
+            MainMS.Size = new Size(676, 25);
             MainMS.TabIndex = 0;
             MainMS.Text = "menuStrip1";
             MainMS.ToolTip = null;
@@ -111,10 +112,20 @@
             darkModeToolStripMenuItem.Text = "Dark Mode";
             darkModeToolStripMenuItem.Click += darkModeToolStripMenuItem_Click;
             // 
+            // VersionLB
+            // 
+            VersionLB.Alignment = ToolStripItemAlignment.Right;
+            VersionLB.Name = "VersionLB";
+            VersionLB.Size = new Size(43, 18);
+            VersionLB.Text = "V0.0.0";
+            VersionLB.ToolTipImage = null;
+            VersionLB.ToolTipText = null;
+            VersionLB.ToolTipTitle = null;
+            // 
             // MainSC
             // 
             MainSC.Dock = DockStyle.Fill;
-            MainSC.Location = new Point(5, 30);
+            MainSC.Location = new Point(4, 29);
             MainSC.Name = "MainSC";
             // 
             // MainSC.Panel1
@@ -129,7 +140,7 @@
             MainSC.Panel2.BackColor = Color.FromArgb(35, 35, 35);
             MainSC.Panel2.Controls.Add(RhsSC);
             MainSC.Panel2.ForeColor = Color.FromArgb(220, 220, 220);
-            MainSC.Size = new Size(674, 605);
+            MainSC.Size = new Size(676, 612);
             MainSC.SplitterDistance = 222;
             MainSC.TabIndex = 3;
             // 
@@ -145,7 +156,7 @@
             ListboxPN.Margin = new Padding(2, 3, 2, 3);
             ListboxPN.Name = "ListboxPN";
             ListboxPN.Padding = new Padding(3);
-            ListboxPN.Size = new Size(222, 570);
+            ListboxPN.Size = new Size(222, 577);
             ListboxPN.TabIndex = 3;
             // 
             // MainLB
@@ -158,7 +169,7 @@
             MainLB.FormattingEnabled = true;
             MainLB.Location = new Point(3, 3);
             MainLB.Name = "MainLB";
-            MainLB.Size = new Size(214, 562);
+            MainLB.Size = new Size(214, 569);
             MainLB.TabIndex = 2;
             MainLB.SelectedIndexChanged += MainLB_SelectedIndexChanged;
             MainLB.SelectedValueChanged += MainLB_SelectedValueChanged;
@@ -174,7 +185,7 @@
             flowLayoutPanel1.Dock = DockStyle.Bottom;
             flowLayoutPanel1.FlowDirection = FlowDirection.RightToLeft;
             flowLayoutPanel1.ForeColor = Color.FromArgb(220, 220, 220);
-            flowLayoutPanel1.Location = new Point(0, 570);
+            flowLayoutPanel1.Location = new Point(0, 577);
             flowLayoutPanel1.Name = "flowLayoutPanel1";
             flowLayoutPanel1.Size = new Size(222, 35);
             flowLayoutPanel1.TabIndex = 1;
@@ -274,8 +285,8 @@
             RhsSC.Panel2.Controls.Add(flowLayoutPanel2);
             RhsSC.Panel2.ForeColor = Color.FromArgb(220, 220, 220);
             RhsSC.Panel2.Padding = new Padding(6);
-            RhsSC.Size = new Size(448, 605);
-            RhsSC.SplitterDistance = 196;
+            RhsSC.Size = new Size(450, 612);
+            RhsSC.SplitterDistance = 198;
             RhsSC.TabIndex = 0;
             // 
             // PgPN
@@ -289,7 +300,7 @@
             PgPN.Margin = new Padding(2);
             PgPN.Name = "PgPN";
             PgPN.Padding = new Padding(3);
-            PgPN.Size = new Size(448, 167);
+            PgPN.Size = new Size(450, 169);
             PgPN.TabIndex = 2;
             // 
             // MainPG
@@ -306,7 +317,7 @@
             MainPG.Location = new Point(3, 3);
             MainPG.Margin = new Padding(5);
             MainPG.Name = "MainPG";
-            MainPG.Size = new Size(442, 161);
+            MainPG.Size = new Size(444, 163);
             MainPG.TabIndex = 0;
             MainPG.ToolbarVisible = false;
             MainPG.ViewBackColor = Color.FromArgb(30, 30, 30);
@@ -341,7 +352,7 @@
             groupBox2.Margin = new Padding(2);
             groupBox2.Name = "groupBox2";
             groupBox2.Padding = new Padding(2);
-            groupBox2.Size = new Size(436, 142);
+            groupBox2.Size = new Size(438, 142);
             groupBox2.TabIndex = 3;
             groupBox2.TabStop = false;
             groupBox2.Text = "Merge Settings";
@@ -353,7 +364,7 @@
             AlsoTagDescChB.Location = new Point(117, 81);
             AlsoTagDescChB.Name = "AlsoTagDescChB";
             AlsoTagDescChB.OverrideTheme = false;
-            AlsoTagDescChB.Size = new Size(305, 24);
+            AlsoTagDescChB.Size = new Size(307, 24);
             AlsoTagDescChB.TabIndex = 8;
             AlsoTagDescChB.Tag = "If a tagging Method is selected whether to also tag the description element";
             AlsoTagDescChB.Text = "Also Tag Description";
@@ -442,7 +453,7 @@
             MethodCB.Margin = new Padding(2);
             MethodCB.Name = "MethodCB";
             MethodCB.SelectedColor = SystemColors.Highlight;
-            MethodCB.Size = new Size(305, 25);
+            MethodCB.Size = new Size(307, 25);
             MethodCB.TabIndex = 1;
             MethodCB.TextEmphasisColor = Color.White;
             MethodCB.TextEmphasisFont = new Font("Segoe UI", 9.75F, FontStyle.Bold);
@@ -463,7 +474,7 @@
             TagPositionCB.Margin = new Padding(2);
             TagPositionCB.Name = "TagPositionCB";
             TagPositionCB.SelectedColor = SystemColors.Highlight;
-            TagPositionCB.Size = new Size(305, 25);
+            TagPositionCB.Size = new Size(307, 25);
             TagPositionCB.TabIndex = 4;
             TagPositionCB.TextEmphasisColor = Color.White;
             TagPositionCB.TextEmphasisFont = new Font("Segoe UI", 9.75F, FontStyle.Bold);
@@ -492,11 +503,11 @@
             WarningLB.Dock = DockStyle.Bottom;
             WarningLB.Image = Properties.Resources.exclamation__frame;
             WarningLB.ImageAlign = ContentAlignment.MiddleRight;
-            WarningLB.Location = new Point(6, 337);
+            WarningLB.Location = new Point(6, 342);
             WarningLB.Margin = new Padding(2, 0, 2, 0);
             WarningLB.Name = "WarningLB";
             WarningLB.Padding = new Padding(2, 2, 2, 6);
-            WarningLB.Size = new Size(436, 27);
+            WarningLB.Size = new Size(438, 27);
             WarningLB.TabIndex = 2;
             WarningLB.Text = "Cannot proceed - all Dats must have a unique tag      ";
             WarningLB.TextAlign = ContentAlignment.MiddleRight;
@@ -521,7 +532,7 @@
             groupBox1.Margin = new Padding(2);
             groupBox1.Name = "groupBox1";
             groupBox1.Padding = new Padding(2);
-            groupBox1.Size = new Size(436, 167);
+            groupBox1.Size = new Size(438, 167);
             groupBox1.TabIndex = 1;
             groupBox1.TabStop = false;
             groupBox1.Text = "Merged Dat Header Details";
@@ -557,7 +568,7 @@
             MergeDatCategoryTB.Location = new Point(117, 123);
             MergeDatCategoryTB.Name = "MergeDatCategoryTB";
             MergeDatCategoryTB.ScaleFont = 100;
-            MergeDatCategoryTB.Size = new Size(305, 29);
+            MergeDatCategoryTB.Size = new Size(307, 29);
             MergeDatCategoryTB.TabIndex = 6;
             MergeDatCategoryTB.TextChanged += MergeDatCategoryTB_TextChanged;
             // 
@@ -593,7 +604,7 @@
             MergeDatAuthorTB.Margin = new Padding(2);
             MergeDatAuthorTB.Name = "MergeDatAuthorTB";
             MergeDatAuthorTB.ScaleFont = 100;
-            MergeDatAuthorTB.Size = new Size(305, 29);
+            MergeDatAuthorTB.Size = new Size(307, 29);
             MergeDatAuthorTB.TabIndex = 4;
             MergeDatAuthorTB.TextChanged += MergeDatAuthorTB_TextChanged;
             // 
@@ -648,7 +659,7 @@
             MergeDatDescTB.Margin = new Padding(2);
             MergeDatDescTB.Name = "MergeDatDescTB";
             MergeDatDescTB.ScaleFont = 100;
-            MergeDatDescTB.Size = new Size(305, 29);
+            MergeDatDescTB.Size = new Size(307, 29);
             MergeDatDescTB.TabIndex = 1;
             MergeDatDescTB.TextChanged += MergeDatDescTB_TextChanged;
             // 
@@ -665,7 +676,7 @@
             MergeDatNameTB.Margin = new Padding(2);
             MergeDatNameTB.Name = "MergeDatNameTB";
             MergeDatNameTB.ScaleFont = 100;
-            MergeDatNameTB.Size = new Size(305, 29);
+            MergeDatNameTB.Size = new Size(307, 29);
             MergeDatNameTB.TabIndex = 0;
             MergeDatNameTB.TextChanged += MergeDatNameTB_TextChanged;
             // 
@@ -678,9 +689,9 @@
             flowLayoutPanel2.Dock = DockStyle.Bottom;
             flowLayoutPanel2.FlowDirection = FlowDirection.RightToLeft;
             flowLayoutPanel2.ForeColor = Color.FromArgb(220, 220, 220);
-            flowLayoutPanel2.Location = new Point(6, 364);
+            flowLayoutPanel2.Location = new Point(6, 369);
             flowLayoutPanel2.Name = "flowLayoutPanel2";
-            flowLayoutPanel2.Size = new Size(436, 35);
+            flowLayoutPanel2.Size = new Size(438, 35);
             flowLayoutPanel2.TabIndex = 0;
             // 
             // MergeBT
@@ -696,7 +707,7 @@
             MergeBT.FlatAppearance.MouseOverBackColor = Color.FromArgb(0, 102, 215);
             MergeBT.FlatStyle = FlatStyle.Flat;
             MergeBT.ForeColor = Color.FromArgb(240, 240, 240);
-            MergeBT.Location = new Point(344, 3);
+            MergeBT.Location = new Point(346, 3);
             MergeBT.Name = "MergeBT";
             MergeBT.Size = new Size(89, 29);
             MergeBT.TabIndex = 1;
@@ -722,7 +733,7 @@
             MainMenuStrip = MainMS;
             MinimumSize = new Size(700, 650);
             Name = "Main";
-            Padding = new Padding(5, 5, 5, 10);
+            Padding = new Padding(4);
             RememberFormState = true;
             StartPosition = FormStartPosition.CenterScreen;
             Text = "MergeDatRom";
@@ -790,5 +801,6 @@
         private stigzler.Winforms.Base.UIElements.Label label5;
         private stigzler.Winforms.Base.UIElements.CheckBox AlsoTagDescChB;
         private stigzler.Winforms.Base.UIElements.CheckBox OpenFileAfterCreatedChB;
+        private stigzler.Winforms.Base.ToolStripElements.Label VersionLB;
     }
 }

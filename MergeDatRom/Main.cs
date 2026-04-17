@@ -226,6 +226,9 @@ namespace MergeDatRom
             AlsoTagDescChB.Checked = Properties.Settings.Default.DefaultAlsoTagDesc;
             OpenFileAfterCreatedChB.Checked = Properties.Settings.Default.OPenFileAfterCreated;
 
+            var version = System.Reflection.Assembly.GetExecutingAssembly().GetName().Version;
+            VersionLB.Text = $"V{version.Major}.{version.Minor}.{version.Build}";
+
             _loggingService.LogClear();
             _loggingService.Log("Starting application.");
         }
