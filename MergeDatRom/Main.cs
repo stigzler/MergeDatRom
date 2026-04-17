@@ -53,8 +53,9 @@ namespace MergeDatRom
 
                 switch (mergeType)
                 {
-                    case MergeType.PriorityOnly: // Only use priority
-                                                 // Keep games[0], discard others (logic depends on your export)
+                    case MergeType.KeepPriorityOnly: // Only use priority
+                                                     // Keep games[0], discard others (logic depends on your export)
+                        games.RemoveAll(g => g != games[0]);
                         break;
 
                     case MergeType.TagAllButPriority: // Tag lower conflicting games
@@ -257,7 +258,7 @@ namespace MergeDatRom
 
             // Checks:
             // If not PriotiyOnly Merge type, ensure tags are set on each DatMetadata and warn if not
-            if (mergeType != MergeType.PriorityOnly && _datMetadatas.Any(meta => string.IsNullOrEmpty(meta.Tag)))
+            if (mergeType != MergeType.KeepPriorityOnly && _datMetadatas.Any(meta => string.IsNullOrEmpty(meta.Tag)))
             {
                 WarningLB.Visible = true;
                 SetWarning($"Tag gamename selected, but not all tags are set. Please update");

@@ -14,6 +14,6 @@ namespace MergeDatRom.Models
         TagAllButPriority,
 
         [Description("Priority Only")]
-        PriorityOnly,
+        KeepPriorityOnly,
     }
 }

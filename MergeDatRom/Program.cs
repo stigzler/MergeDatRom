@@ -15,6 +15,14 @@ namespace MergeDatRom
             // see https://aka.ms/applicationconfiguration.
             ApplicationConfiguration.Initialize();
 
+            // Handles Settings transfer on upgrade of version
+            if (Properties.Settings.Default.UpgradeRequired)
+            {
+                Properties.Settings.Default.Upgrade();
+                Properties.Settings.Default.UpgradeRequired = false;
+                Properties.Settings.Default.Save();
+            }
+
             var services = new ServiceCollection();
             ConfigureServices(services);
 
