@@ -5,7 +5,8 @@ A small app to merge rom dats into a single .dat. It was developed for an unusua
 Essentially, this either merges duplicate Game elements with Tags added to the game.name and/or game.description OR picks a priority entry to place intot he final merged Dat. 
 
 ## Screenshot
-<img width="1186" height="654" alt="Screenshot 2026-04-17 110219" src="https://github.com/user-attachments/assets/e49fe976-211c-4334-8947-40b44fb24cad" />
+<img width="1186" height="654" alt="Screenshot 2026-04-17 110219" src="https://github.com/user-attachments/assets/3c956d9f-e313-4d73-a513-474b9d866f65" />
+
 
 ## Example Merged .DAT
 ```xml
