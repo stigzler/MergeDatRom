@@ -4,6 +4,7 @@ using stigzler.Winforms.Base;
 using stigzler.Winforms.Base.Forms.BaseForm;
 using System.ComponentModel;
 using System.Diagnostics;
+using System.Text.RegularExpressions;
 using System.Xml.Linq;
 
 namespace MergeDatRom
@@ -27,6 +28,7 @@ namespace MergeDatRom
         {
             // Key: Game Name, Value: List of XML nodes from different DATs
             var nameGroups = new Dictionary<string, List<XElement>>(StringComparer.OrdinalIgnoreCase);
+            bool stripTags = StripTagsChB.Checked;
 
             // Pass 1: Load and Group
             foreach (var meta in datList)
@@ -37,7 +39,14 @@ namespace MergeDatRom
                     // Attach the metadata object so we know the Tag/Priority of this specific node
                     gameNode.AddAnnotation(meta);
 
-                    string gameName = gameNode.Attribute("name")?.Value ?? "Unknown";
+                    string originalGameName = gameNode.Attribute("name")?.Value ?? "Unknown";
+                    string gameName = originalGameName;
+
+                    if (stripTags)
+                    {
+                        gameName = GetGameBaseName(originalGameName);
+                    }
+
                     if (!nameGroups.ContainsKey(gameName))
                         nameGroups[gameName] = new List<XElement>();
 
@@ -225,6 +234,7 @@ namespace MergeDatRom
             MergeDatCategoryTB.Text = Properties.Settings.Default.DefaultCategory;
             AlsoTagDescChB.Checked = Properties.Settings.Default.DefaultAlsoTagDesc;
             OpenFileAfterCreatedChB.Checked = Properties.Settings.Default.OPenFileAfterCreated;
+            StripTagsChB.Checked = Properties.Settings.Default.StripTagsForMatch;
 
             var version = System.Reflection.Assembly.GetExecutingAssembly().GetName().Version;
             VersionLB.Text = $"V{version.Major}.{version.Minor}.{version.Build}";
@@ -336,6 +346,33 @@ namespace MergeDatRom
             WarningLB.Visible = true;
             WarningLB.Image = Properties.Resources.exclamation__frame;
             WarningLB.Text = message + _warningMessageRightPadding;
+        }
+
+        private string GetGameBaseName(string name)
+        {
+            // Regex to find the first year in parentheses, e.g., " (1987)"
+            var regex = new Regex(@"\s\((\d{4})\)");
+            var match = regex.Match(name);
+
+            if (match.Success)
+            {
+                // Return the part of the name before the year tag + the year tag itself
+                return name.Substring(0, match.Index) + match.Value;
+            }
+
+            // Fallback for non-TOSEC style names: strip all tags.
+            int tagStartIndex = name.IndexOfAny(new[] { '(', '[' });
+            if (tagStartIndex > 0)
+            {
+                return name.Substring(0, tagStartIndex).TrimEnd();
+            }
+
+            return name; // Return original name if no tags found
+        }
+
+        private void StripTagsChB_CheckedChanged(object sender, EventArgs e)
+        {
+            Properties.Settings.Default.StripTagsForMatch = StripTagsChB.Checked;
         }
     }
 }

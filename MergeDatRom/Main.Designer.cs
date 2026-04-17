@@ -46,8 +46,9 @@
             MainPG = new stigzler.Winforms.Base.UIElements.PropertyGrid();
             label1 = new Label();
             groupBox2 = new stigzler.Winforms.Base.UIElements.GroupBox();
-            AlsoTagDescChB = new stigzler.Winforms.Base.UIElements.CheckBox();
+            StripTagsChB = new stigzler.Winforms.Base.UIElements.CheckBox();
             MainTT = new stigzler.Winforms.Base.UIElements.ToolTip(components);
+            AlsoTagDescChB = new stigzler.Winforms.Base.UIElements.CheckBox();
             OpenFileAfterCreatedChB = new stigzler.Winforms.Base.UIElements.CheckBox();
             label7 = new stigzler.Winforms.Base.UIElements.Label();
             MethodCB = new stigzler.Winforms.Base.UIElements.ComboBox();
@@ -140,7 +141,7 @@
             MainSC.Panel2.BackColor = Color.FromArgb(35, 35, 35);
             MainSC.Panel2.Controls.Add(RhsSC);
             MainSC.Panel2.ForeColor = Color.FromArgb(220, 220, 220);
-            MainSC.Size = new Size(676, 612);
+            MainSC.Size = new Size(676, 849);
             MainSC.SplitterDistance = 222;
             MainSC.TabIndex = 3;
             // 
@@ -156,7 +157,7 @@
             ListboxPN.Margin = new Padding(2, 3, 2, 3);
             ListboxPN.Name = "ListboxPN";
             ListboxPN.Padding = new Padding(3);
-            ListboxPN.Size = new Size(222, 577);
+            ListboxPN.Size = new Size(222, 814);
             ListboxPN.TabIndex = 3;
             // 
             // MainLB
@@ -169,7 +170,7 @@
             MainLB.FormattingEnabled = true;
             MainLB.Location = new Point(3, 3);
             MainLB.Name = "MainLB";
-            MainLB.Size = new Size(214, 569);
+            MainLB.Size = new Size(214, 806);
             MainLB.TabIndex = 2;
             MainLB.SelectedIndexChanged += MainLB_SelectedIndexChanged;
             MainLB.SelectedValueChanged += MainLB_SelectedValueChanged;
@@ -185,7 +186,7 @@
             flowLayoutPanel1.Dock = DockStyle.Bottom;
             flowLayoutPanel1.FlowDirection = FlowDirection.RightToLeft;
             flowLayoutPanel1.ForeColor = Color.FromArgb(220, 220, 220);
-            flowLayoutPanel1.Location = new Point(0, 577);
+            flowLayoutPanel1.Location = new Point(0, 814);
             flowLayoutPanel1.Name = "flowLayoutPanel1";
             flowLayoutPanel1.Size = new Size(222, 35);
             flowLayoutPanel1.TabIndex = 1;
@@ -285,8 +286,8 @@
             RhsSC.Panel2.Controls.Add(flowLayoutPanel2);
             RhsSC.Panel2.ForeColor = Color.FromArgb(220, 220, 220);
             RhsSC.Panel2.Padding = new Padding(6);
-            RhsSC.Size = new Size(450, 612);
-            RhsSC.SplitterDistance = 198;
+            RhsSC.Size = new Size(450, 849);
+            RhsSC.SplitterDistance = 274;
             RhsSC.TabIndex = 0;
             // 
             // PgPN
@@ -300,7 +301,7 @@
             PgPN.Margin = new Padding(2);
             PgPN.Name = "PgPN";
             PgPN.Padding = new Padding(3);
-            PgPN.Size = new Size(450, 169);
+            PgPN.Size = new Size(450, 245);
             PgPN.TabIndex = 2;
             // 
             // MainPG
@@ -317,7 +318,7 @@
             MainPG.Location = new Point(3, 3);
             MainPG.Margin = new Padding(5);
             MainPG.Name = "MainPG";
-            MainPG.Size = new Size(444, 163);
+            MainPG.Size = new Size(444, 239);
             MainPG.TabIndex = 0;
             MainPG.ToolbarVisible = false;
             MainPG.ViewBackColor = Color.FromArgb(30, 30, 30);
@@ -340,6 +341,7 @@
             groupBox2.BorderColor = Color.FromArgb(100, 100, 100);
             groupBox2.BorderStyle = System.Drawing.Drawing2D.DashStyle.Solid;
             groupBox2.BorderThickness = 1;
+            groupBox2.Controls.Add(StripTagsChB);
             groupBox2.Controls.Add(AlsoTagDescChB);
             groupBox2.Controls.Add(OpenFileAfterCreatedChB);
             groupBox2.Controls.Add(label7);
@@ -352,29 +354,27 @@
             groupBox2.Margin = new Padding(2);
             groupBox2.Name = "groupBox2";
             groupBox2.Padding = new Padding(2);
-            groupBox2.Size = new Size(438, 142);
+            groupBox2.Size = new Size(438, 175);
             groupBox2.TabIndex = 3;
             groupBox2.TabStop = false;
             groupBox2.Text = "Merge Settings";
             groupBox2.TitleColor = Color.FromArgb(220, 220, 220);
             // 
-            // AlsoTagDescChB
+            // StripTagsChB
             // 
-            AlsoTagDescChB.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
-            AlsoTagDescChB.Location = new Point(117, 81);
-            AlsoTagDescChB.Name = "AlsoTagDescChB";
-            AlsoTagDescChB.OverrideTheme = false;
-            AlsoTagDescChB.Size = new Size(307, 24);
-            AlsoTagDescChB.TabIndex = 8;
-            AlsoTagDescChB.Tag = "If a tagging Method is selected whether to also tag the description element";
-            AlsoTagDescChB.Text = "Also Tag Description";
-            AlsoTagDescChB.ToolTip = MainTT;
-            AlsoTagDescChB.ToolTipHorizontalAlignment = HorizontalAlignment.Right;
-            AlsoTagDescChB.ToolTipImage = null;
-            AlsoTagDescChB.ToolTipText = null;
-            AlsoTagDescChB.ToolTipTitle = null;
-            AlsoTagDescChB.UseVisualStyleBackColor = true;
-            AlsoTagDescChB.CheckedChanged += AlsoTagDescChB_CheckedChanged;
+            StripTagsChB.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
+            StripTagsChB.Location = new Point(117, 141);
+            StripTagsChB.Name = "StripTagsChB";
+            StripTagsChB.OverrideTheme = false;
+            StripTagsChB.Size = new Size(307, 24);
+            StripTagsChB.TabIndex = 9;
+            StripTagsChB.Text = "Strip Tags for matching";
+            StripTagsChB.ToolTip = MainTT;
+            StripTagsChB.ToolTipHorizontalAlignment = HorizontalAlignment.Right;
+            StripTagsChB.ToolTipImage = null;
+            StripTagsChB.ToolTipText = null;
+            StripTagsChB.ToolTipTitle = null;
+            StripTagsChB.UseVisualStyleBackColor = true;
             // 
             // MainTT
             // 
@@ -401,6 +401,24 @@
             MainTT.ToolTipText = "Information here..";
             MainTT.ToolTipTitle = "Info";
             MainTT.Width = 128;
+            // 
+            // AlsoTagDescChB
+            // 
+            AlsoTagDescChB.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
+            AlsoTagDescChB.Location = new Point(117, 81);
+            AlsoTagDescChB.Name = "AlsoTagDescChB";
+            AlsoTagDescChB.OverrideTheme = false;
+            AlsoTagDescChB.Size = new Size(307, 24);
+            AlsoTagDescChB.TabIndex = 8;
+            AlsoTagDescChB.Tag = "If a tagging Method is selected whether to also tag the description element";
+            AlsoTagDescChB.Text = "Also Tag Description";
+            AlsoTagDescChB.ToolTip = MainTT;
+            AlsoTagDescChB.ToolTipHorizontalAlignment = HorizontalAlignment.Right;
+            AlsoTagDescChB.ToolTipImage = null;
+            AlsoTagDescChB.ToolTipText = null;
+            AlsoTagDescChB.ToolTipTitle = null;
+            AlsoTagDescChB.UseVisualStyleBackColor = true;
+            AlsoTagDescChB.CheckedChanged += AlsoTagDescChB_CheckedChanged;
             // 
             // OpenFileAfterCreatedChB
             // 
@@ -503,7 +521,7 @@
             WarningLB.Dock = DockStyle.Bottom;
             WarningLB.Image = Properties.Resources.exclamation__frame;
             WarningLB.ImageAlign = ContentAlignment.MiddleRight;
-            WarningLB.Location = new Point(6, 342);
+            WarningLB.Location = new Point(6, 503);
             WarningLB.Margin = new Padding(2, 0, 2, 0);
             WarningLB.Name = "WarningLB";
             WarningLB.Padding = new Padding(2, 2, 2, 6);
@@ -689,7 +707,7 @@
             flowLayoutPanel2.Dock = DockStyle.Bottom;
             flowLayoutPanel2.FlowDirection = FlowDirection.RightToLeft;
             flowLayoutPanel2.ForeColor = Color.FromArgb(220, 220, 220);
-            flowLayoutPanel2.Location = new Point(6, 369);
+            flowLayoutPanel2.Location = new Point(6, 530);
             flowLayoutPanel2.Name = "flowLayoutPanel2";
             flowLayoutPanel2.Size = new Size(438, 35);
             flowLayoutPanel2.TabIndex = 0;
@@ -723,7 +741,7 @@
             // 
             AutoScaleDimensions = new SizeF(7F, 17F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(684, 645);
+            ClientSize = new Size(684, 882);
             Controls.Add(MainSC);
             Controls.Add(MainMS);
             DarkMode = true;
@@ -802,5 +820,6 @@
         private stigzler.Winforms.Base.UIElements.CheckBox AlsoTagDescChB;
         private stigzler.Winforms.Base.UIElements.CheckBox OpenFileAfterCreatedChB;
         private stigzler.Winforms.Base.ToolStripElements.Label VersionLB;
+        private stigzler.Winforms.Base.UIElements.CheckBox StripTagsChB;
     }
 }
