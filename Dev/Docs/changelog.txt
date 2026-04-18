@@ -1,4 +1,4 @@
-﻿V1.1.0
+﻿V1.4.0
 New Features:
 Accommodate TOSEC files (Retool doesn't do this)
 Added include/exclude specific tags (inc whether square or brackets)
@@ -6,3 +6,5 @@ Added ability to group games ignoring tags
 Added set default settings
 Added load settings form pre-existing mtr dat
 Added ability to keep game media sets (e.g. those tagged with Disc, Side or Part) together when grouping games
+
+V1.5.0
