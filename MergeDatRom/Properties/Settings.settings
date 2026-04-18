@@ -32,5 +32,17 @@
     <Setting Name="StripTagsForMatch" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>
     </Setting>
+    <Setting Name="IncludeSquareTags" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="IncludeBracketTags" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="DefaultMethod" Type="System.String" Scope="User">
+      <Value Profile="(Default)">KeepPriorityOnly</Value>
+    </Setting>
+    <Setting Name="DefaultTagPosition" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Suffix</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

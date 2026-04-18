@@ -177,11 +177,6 @@ namespace MergeDatRom
             }
         }
 
-        private void AlsoTagDescChB_CheckedChanged(object sender, EventArgs e)
-        {
-            Properties.Settings.Default.DefaultAlsoTagDesc = AlsoTagDescChB.Checked;
-        }
-
         private List<Regex> ParseExcludeTags(string tagsCsv)
         {
             var patterns = new List<Regex>();
@@ -381,6 +376,10 @@ namespace MergeDatRom
             AlsoTagDescChB.Checked = Properties.Settings.Default.DefaultAlsoTagDesc;
             OpenFileAfterCreatedChB.Checked = Properties.Settings.Default.OPenFileAfterCreated;
             StripTagsChB.Checked = Properties.Settings.Default.StripTagsForMatch;
+            UseTagBracketChB.Checked = Properties.Settings.Default.IncludeBracketTags;
+            UseTagSquareChB.Checked = Properties.Settings.Default.IncludeSquareTags;
+            MethodCB.Text = Properties.Settings.Default.DefaultMethod;
+            TagPositionCB.Text = Properties.Settings.Default.DefaultTagPosition;
 
             var version = System.Reflection.Assembly.GetExecutingAssembly().GetName().Version;
             VersionLB.Text = $"V{version.Major}.{version.Minor}.{version.Build}";
@@ -428,24 +427,19 @@ namespace MergeDatRom
             ProcessMerge(_datMetadatas, (MergeType)MethodCB.SelectedItem);
         }
 
-        private void MergeDatAuthorTB_TextChanged(object sender, EventArgs e)
-        {
-            Properties.Settings.Default.DefaultAuthor = MergeDatAuthorTB.Text;
-        }
-
-        private void MergeDatCategoryTB_TextChanged(object sender, EventArgs e)
-        {
-            Properties.Settings.Default.DefaultCategory = MergeDatCategoryTB.Text;
-        }
-
-        private void MergeDatDescTB_TextChanged(object sender, EventArgs e)
-        {
-            Properties.Settings.Default.DefaultDesc = MergeDatDescTB.Text;
-        }
-
-        private void MergeDatNameTB_TextChanged(object sender, EventArgs e)
+        private void SetDefaults()
         {
             Properties.Settings.Default.DefaultName = MergeDatNameTB.Text;
+            Properties.Settings.Default.DefaultDesc = MergeDatDescTB.Text;
+            Properties.Settings.Default.DefaultCategory = MergeDatCategoryTB.Text;
+            Properties.Settings.Default.DefaultAuthor = MergeDatAuthorTB.Text;
+            Properties.Settings.Default.DefaultAlsoTagDesc = AlsoTagDescChB.Checked;
+            Properties.Settings.Default.OPenFileAfterCreated = OpenFileAfterCreatedChB.Checked;
+            Properties.Settings.Default.StripTagsForMatch = StripTagsChB.Checked;
+            Properties.Settings.Default.IncludeSquareTags = UseTagSquareChB.Checked;
+            Properties.Settings.Default.IncludeBracketTags = UseTagBracketChB.Checked;
+            Properties.Settings.Default.DefaultMethod = MethodCB.Text;
+            Properties.Settings.Default.DefaultTagPosition = TagPositionCB.Text;
         }
 
         private void MoveSelectedDat(int direction)
@@ -470,11 +464,6 @@ namespace MergeDatRom
             {
                 _suppressSelectionChanged = false;
             }
-        }
-
-        private void OpenFileAfterCreatedChB_CheckedChanged(object sender, EventArgs e)
-        {
-            Properties.Settings.Default.OPenFileAfterCreated = OpenFileAfterCreatedChB.Checked;
         }
 
         private void PriorityDownBT_Click(object sender, EventArgs e)
@@ -532,7 +521,6 @@ namespace MergeDatRom
 
         private void StripTagsChB_CheckedChanged(object sender, EventArgs e)
         {
-            Properties.Settings.Default.StripTagsForMatch = StripTagsChB.Checked;
         }
 
         private void LoadSetupBT_Click(object sender, EventArgs e)
@@ -547,52 +535,58 @@ namespace MergeDatRom
 
             if (ofd.ShowDialog() != DialogResult.OK) return;
 
-            try
-            {
-                LoadSetupFromFile(ofd.FileName);
-                SetSuccess("Successfully loaded setup.");
-            }
-            catch (Exception ex)
-            {
-                _loggingService.Log($"Failed to load setup from file: {ex.Message}");
-                SetCritical("Failed to load setup. See logs for details.");
-            }
+            _loggingService.Log($"User chose Load Setup form file: {ofd.FileName}");
+            bool success = LoadSetupFromFile(ofd.FileName);
+
+            if (success) { SetSuccess("Successfully loaded setup."); }
         }
 
-        private void LoadSetupFromFile(string filePath)
+        private bool LoadSetupFromFile(string filePath)
         {
-            XElement setupNode = null;
+            XElement headerNode = null;
 
-            // Use XmlReader to efficiently find the <setup> element
+            // Use XmlReader to efficiently find and read the entire <header> element
             using (var reader = XmlReader.Create(filePath))
             {
                 while (reader.Read())
                 {
-                    if (reader.IsStartElement() && reader.Name == "setup")
+                    if (reader.IsStartElement() && reader.Name == "header")
                     {
-                        // Once found, read the subtree into an XElement
-                        setupNode = XNode.ReadFrom(reader) as XElement;
+                        headerNode = XNode.ReadFrom(reader) as XElement;
                         break;
                     }
-                    // Stop reading after the header to be efficient
-                    if (reader.NodeType == XmlNodeType.EndElement && reader.Name == "header")
+                    // Optimization: stop if we're past the header section
+                    if (reader.IsStartElement() && reader.Name == "game")
                     {
                         break;
                     }
                 }
             }
 
+            if (headerNode == null)
+            {
+                SetCritical($"No header. Not MergeDatRom dat file.");
+                return false;
+            }
+
+            if (headerNode.Element("tool") == null || headerNode.Element("tool")?.Value != "MergeDatRom")
+            {
+                SetCritical($"Incorrect tool element. Not MergeDatRom dat file.");
+                return false;
+            }
+
+            var setupNode = headerNode.Element("setup");
             if (setupNode == null)
             {
-                throw new InvalidOperationException("The selected file does not contain setup information.");
+                SetCritical($"No setup details. Not MergeDatRom dat file.");
+                return false;
             }
 
             // --- Restore Header Details ---
-            var headerNode = setupNode.Parent;
-            MergeDatNameTB.Text = headerNode?.Element("name")?.Value;
-            MergeDatDescTB.Text = headerNode?.Element("description")?.Value;
-            MergeDatAuthorTB.Text = headerNode?.Element("author")?.Value;
-            MergeDatCategoryTB.Text = headerNode?.Element("category")?.Value;
+            MergeDatNameTB.Text = headerNode.Element("name")?.Value;
+            MergeDatDescTB.Text = headerNode.Element("description")?.Value;
+            MergeDatAuthorTB.Text = headerNode.Element("author")?.Value;
+            MergeDatCategoryTB.Text = headerNode.Element("category")?.Value;
 
             // --- Restore Global Settings ---
             var globalSettings = setupNode.Element("GlobalSettings");
@@ -661,10 +655,19 @@ namespace MergeDatRom
                 {
                     foreach (var missingFile in missingFiles)
                     {
-                        SetWarning($"DAT no longer available: {missingFile}");
+                        _loggingService.Log($"DAT file from setup not found: {missingFile}");
+                        SetWarning($"DAT/s no longer available. See log file for details.");
                     }
+                    return false; // Indicate that not all files were loaded successfully
                 }
             }
+            return true;
+        }
+
+        private void SetDefaultsBT_Click(object sender, EventArgs e)
+        {
+            SetDefaults();
+            SetSuccess("Defaults Saved");
         }
     }
 }

@@ -52,12 +52,14 @@ namespace MergeDatRom.Services
                     )
                 );
 
+                var version = System.Reflection.Assembly.GetExecutingAssembly().GetName().Version;
                 var header = new XElement("header",
                     new XElement("name", name ?? string.Empty),
                     new XElement("description", description ?? string.Empty),
                     new XElement("date", DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss")),
                     new XElement("author", author ?? string.Empty),
                     new XElement("category", category ?? string.Empty),
+                    new XElement("tool", new XAttribute("version", $"{version.Major}.{version.Minor}.{version.Build}"), "MergeDatRom"),
                     setupElement // Add the setup block to the header
                 );
 

@@ -142,5 +142,53 @@ namespace MergeDatRom.Properties {
                 this["StripTagsForMatch"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool IncludeSquareTags {
+            get {
+                return ((bool)(this["IncludeSquareTags"]));
+            }
+            set {
+                this["IncludeSquareTags"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool IncludeBracketTags {
+            get {
+                return ((bool)(this["IncludeBracketTags"]));
+            }
+            set {
+                this["IncludeBracketTags"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("KeepPriorityOnly")]
+        public string DefaultMethod {
+            get {
+                return ((string)(this["DefaultMethod"]));
+            }
+            set {
+                this["DefaultMethod"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("Suffix")]
+        public string DefaultTagPosition {
+            get {
+                return ((string)(this["DefaultTagPosition"]));
+            }
+            set {
+                this["DefaultTagPosition"] = value;
+            }
+        }
     }
 }

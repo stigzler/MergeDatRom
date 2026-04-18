@@ -70,6 +70,7 @@
             flowLayoutPanel2 = new stigzler.Winforms.Base.UIElements.FlowLayoutPanel();
             MergeBT = new stigzler.Winforms.Base.UIElements.Button();
             LoadSetupBT = new stigzler.Winforms.Base.UIElements.Button();
+            SetDefaultsBT = new stigzler.Winforms.Base.UIElements.Button();
             MainMS.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)MainSC).BeginInit();
             MainSC.Panel1.SuspendLayout();
@@ -360,7 +361,7 @@
             groupBox2.Margin = new Padding(2);
             groupBox2.Name = "groupBox2";
             groupBox2.Padding = new Padding(2);
-            groupBox2.Size = new Size(438, 260);
+            groupBox2.Size = new Size(438, 204);
             groupBox2.TabIndex = 3;
             groupBox2.TabStop = false;
             groupBox2.Text = "Merge Settings";
@@ -472,7 +473,6 @@
             AlsoTagDescChB.ToolTipText = "If a tagging Method is selected whether to also tag the description element";
             AlsoTagDescChB.ToolTipTitle = null;
             AlsoTagDescChB.UseVisualStyleBackColor = true;
-            AlsoTagDescChB.CheckedChanged += AlsoTagDescChB_CheckedChanged;
             // 
             // OpenFileAfterCreatedChB
             // 
@@ -488,7 +488,6 @@
             OpenFileAfterCreatedChB.ToolTipText = null;
             OpenFileAfterCreatedChB.ToolTipTitle = null;
             OpenFileAfterCreatedChB.UseVisualStyleBackColor = true;
-            OpenFileAfterCreatedChB.CheckedChanged += OpenFileAfterCreatedChB_CheckedChanged;
             // 
             // label7
             // 
@@ -642,7 +641,6 @@
             MergeDatCategoryTB.ScaleFont = 100;
             MergeDatCategoryTB.Size = new Size(307, 29);
             MergeDatCategoryTB.TabIndex = 6;
-            MergeDatCategoryTB.TextChanged += MergeDatCategoryTB_TextChanged;
             // 
             // label4
             // 
@@ -678,7 +676,6 @@
             MergeDatAuthorTB.ScaleFont = 100;
             MergeDatAuthorTB.Size = new Size(307, 29);
             MergeDatAuthorTB.TabIndex = 4;
-            MergeDatAuthorTB.TextChanged += MergeDatAuthorTB_TextChanged;
             // 
             // label3
             // 
@@ -733,7 +730,6 @@
             MergeDatDescTB.ScaleFont = 100;
             MergeDatDescTB.Size = new Size(307, 29);
             MergeDatDescTB.TabIndex = 1;
-            MergeDatDescTB.TextChanged += MergeDatDescTB_TextChanged;
             // 
             // MergeDatNameTB
             // 
@@ -750,7 +746,6 @@
             MergeDatNameTB.ScaleFont = 100;
             MergeDatNameTB.Size = new Size(307, 29);
             MergeDatNameTB.TabIndex = 0;
-            MergeDatNameTB.TextChanged += MergeDatNameTB_TextChanged;
             // 
             // flowLayoutPanel2
             // 
@@ -759,6 +754,7 @@
             flowLayoutPanel2.BackgroundShadeFactor = 1D;
             flowLayoutPanel2.Controls.Add(MergeBT);
             flowLayoutPanel2.Controls.Add(LoadSetupBT);
+            flowLayoutPanel2.Controls.Add(SetDefaultsBT);
             flowLayoutPanel2.Dock = DockStyle.Bottom;
             flowLayoutPanel2.FlowDirection = FlowDirection.RightToLeft;
             flowLayoutPanel2.ForeColor = Color.FromArgb(220, 220, 220);
@@ -816,6 +812,31 @@
             LoadSetupBT.ToolTipTitle = null;
             LoadSetupBT.UseVisualStyleBackColor = false;
             LoadSetupBT.Click += LoadSetupBT_Click;
+            // 
+            // SetDefaultsBT
+            // 
+            SetDefaultsBT.AutoSize = true;
+            SetDefaultsBT.BackColor = Color.FromArgb(55, 55, 55);
+            SetDefaultsBT.DefocusOnClick = true;
+            SetDefaultsBT.DisabledBackColor = Color.FromArgb(30, 30, 30);
+            SetDefaultsBT.DisabledBorderColor = Color.FromArgb(60, 60, 60);
+            SetDefaultsBT.DisabledForeColor = Color.FromArgb(125, 125, 125);
+            SetDefaultsBT.Dock = DockStyle.Bottom;
+            SetDefaultsBT.FlatAppearance.BorderColor = Color.FromArgb(100, 100, 100);
+            SetDefaultsBT.FlatAppearance.MouseOverBackColor = Color.FromArgb(0, 102, 215);
+            SetDefaultsBT.FlatStyle = FlatStyle.Flat;
+            SetDefaultsBT.ForeColor = Color.FromArgb(240, 240, 240);
+            SetDefaultsBT.Location = new Point(156, 3);
+            SetDefaultsBT.Name = "SetDefaultsBT";
+            SetDefaultsBT.Size = new Size(89, 29);
+            SetDefaultsBT.TabIndex = 3;
+            SetDefaultsBT.Text = "Set Defaults";
+            SetDefaultsBT.ToolTip = MainTT;
+            SetDefaultsBT.ToolTipImage = null;
+            SetDefaultsBT.ToolTipText = null;
+            SetDefaultsBT.ToolTipTitle = null;
+            SetDefaultsBT.UseVisualStyleBackColor = false;
+            SetDefaultsBT.Click += SetDefaultsBT_Click;
             // 
             // Main
             // 
@@ -905,5 +926,6 @@
         private stigzler.Winforms.Base.UIElements.CheckBox UseTagBracketChB;
         private stigzler.Winforms.Base.UIElements.CheckBox UseTagSquareChB;
         private stigzler.Winforms.Base.UIElements.Button LoadSetupBT;
+        private stigzler.Winforms.Base.UIElements.Button SetDefaultsBT;
     }
 }
