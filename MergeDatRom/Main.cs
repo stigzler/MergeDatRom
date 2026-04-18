@@ -74,11 +74,24 @@ namespace MergeDatRom
                     }
 
                     // Grouping
-                    string gameName = stripTags ? GetGameBaseName(originalGameName) : originalGameName;
-                    if (preserveMultiDisc && IsMultiDisc(originalGameName))
+                    string gameName;
+                    if (stripTags)
+                    {
+                        if (preserveMultiDisc && IsMultiDisc(originalGameName))
+                        {
+                            gameName = GetMultiDiscGameBaseName(originalGameName);
+                        }
+                        else
+                        {
+                            gameName = GetGameBaseName(originalGameName);
+                        }
+                    }
+                    else
                     {
                         gameName = originalGameName;
                     }
+
+                    // _loggingService.Log($"[DEBUG] Original: '{originalGameName}', IsMulti: {IsMultiDisc(originalGameName)}, Key: '{gameName}'");
 
                     if (!gamesInCurrentDat.ContainsKey(gameName))
                     {
@@ -562,8 +575,16 @@ namespace MergeDatRom
 
         private bool IsMultiDisc(string gameName)
         {
-            // Regex to detect (Disk...), (Disc...), or (Side...) tags. Case-insensitive.
-            return Regex.IsMatch(gameName, @"\((Disk|Disc|Side)", RegexOptions.IgnoreCase);
+            // Regex to detect (Disk...), (Disc...), (Side...), or (Part...) tags. Case-insensitive.
+            // Using word boundaries to be more robust.
+            return Regex.IsMatch(gameName, @"\b(Disk|Disc|Side|Part)\b", RegexOptions.IgnoreCase);
+        }
+
+        private string GetMultiDiscGameBaseName(string name)
+        {
+            // For multi-disc games, the key is the name with alternate version tags (e.g., [a], [a2]) removed.
+            var alternateVersionRegex = new Regex(@"\s*\[[^\]]*\]");
+            return alternateVersionRegex.Replace(name, "").Trim();
         }
 
         private void StripTagsChB_CheckedChanged(object sender, EventArgs e)

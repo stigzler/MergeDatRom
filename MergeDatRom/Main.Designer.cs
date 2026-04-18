@@ -153,7 +153,7 @@
             MainSC.Panel2.BackColor = Color.FromArgb(35, 35, 35);
             MainSC.Panel2.Controls.Add(RhsSC);
             MainSC.Panel2.ForeColor = Color.FromArgb(220, 220, 220);
-            MainSC.Size = new Size(676, 940);
+            MainSC.Size = new Size(676, 816);
             MainSC.SplitterDistance = 222;
             MainSC.TabIndex = 3;
             // 
@@ -169,7 +169,7 @@
             ListboxPN.Margin = new Padding(2, 3, 2, 3);
             ListboxPN.Name = "ListboxPN";
             ListboxPN.Padding = new Padding(3);
-            ListboxPN.Size = new Size(222, 905);
+            ListboxPN.Size = new Size(222, 781);
             ListboxPN.TabIndex = 3;
             // 
             // MainLB
@@ -182,7 +182,7 @@
             MainLB.FormattingEnabled = true;
             MainLB.Location = new Point(3, 3);
             MainLB.Name = "MainLB";
-            MainLB.Size = new Size(214, 897);
+            MainLB.Size = new Size(214, 773);
             MainLB.TabIndex = 2;
             MainLB.SelectedIndexChanged += MainLB_SelectedIndexChanged;
             MainLB.SelectedValueChanged += MainLB_SelectedValueChanged;
@@ -198,7 +198,7 @@
             flowLayoutPanel1.Dock = DockStyle.Bottom;
             flowLayoutPanel1.FlowDirection = FlowDirection.RightToLeft;
             flowLayoutPanel1.ForeColor = Color.FromArgb(220, 220, 220);
-            flowLayoutPanel1.Location = new Point(0, 905);
+            flowLayoutPanel1.Location = new Point(0, 781);
             flowLayoutPanel1.Name = "flowLayoutPanel1";
             flowLayoutPanel1.Size = new Size(222, 35);
             flowLayoutPanel1.TabIndex = 1;
@@ -299,8 +299,8 @@
             RhsSC.Panel2.Controls.Add(flowLayoutPanel2);
             RhsSC.Panel2.ForeColor = Color.FromArgb(220, 220, 220);
             RhsSC.Panel2.Padding = new Padding(6);
-            RhsSC.Size = new Size(450, 940);
-            RhsSC.SplitterDistance = 302;
+            RhsSC.Size = new Size(450, 816);
+            RhsSC.SplitterDistance = 220;
             RhsSC.TabIndex = 0;
             // 
             // PgPN
@@ -314,7 +314,7 @@
             PgPN.Margin = new Padding(2);
             PgPN.Name = "PgPN";
             PgPN.Padding = new Padding(3);
-            PgPN.Size = new Size(450, 273);
+            PgPN.Size = new Size(450, 191);
             PgPN.TabIndex = 2;
             // 
             // MainPG
@@ -330,7 +330,7 @@
             MainPG.Location = new Point(3, 3);
             MainPG.Margin = new Padding(5);
             MainPG.Name = "MainPG";
-            MainPG.Size = new Size(444, 267);
+            MainPG.Size = new Size(444, 185);
             MainPG.TabIndex = 0;
             MainPG.ToolbarVisible = false;
             MainPG.ViewBackColor = Color.FromArgb(30, 30, 30);
@@ -359,7 +359,7 @@
             groupBox2.Controls.Add(TagPositionCB);
             groupBox2.Dock = DockStyle.Top;
             groupBox2.ForeColor = Color.FromArgb(220, 220, 220);
-            groupBox2.Location = new Point(6, 413);
+            groupBox2.Location = new Point(6, 379);
             groupBox2.Margin = new Padding(2);
             groupBox2.Name = "groupBox2";
             groupBox2.Padding = new Padding(2);
@@ -487,7 +487,7 @@
             groupBox3.ForeColor = Color.FromArgb(220, 220, 220);
             groupBox3.Location = new Point(6, 173);
             groupBox3.Name = "groupBox3";
-            groupBox3.Size = new Size(438, 240);
+            groupBox3.Size = new Size(438, 206);
             groupBox3.TabIndex = 4;
             groupBox3.TabStop = false;
             groupBox3.Text = "Merge Settings";
@@ -684,7 +684,7 @@
             WarningLB.Dock = DockStyle.Bottom;
             WarningLB.Image = Properties.Resources.exclamation__frame;
             WarningLB.ImageAlign = ContentAlignment.MiddleRight;
-            WarningLB.Location = new Point(6, 566);
+            WarningLB.Location = new Point(6, 524);
             WarningLB.Margin = new Padding(2, 0, 2, 0);
             WarningLB.Name = "WarningLB";
             WarningLB.Padding = new Padding(2, 2, 2, 6);
@@ -868,7 +868,7 @@
             flowLayoutPanel2.Dock = DockStyle.Bottom;
             flowLayoutPanel2.FlowDirection = FlowDirection.RightToLeft;
             flowLayoutPanel2.ForeColor = Color.FromArgb(220, 220, 220);
-            flowLayoutPanel2.Location = new Point(6, 593);
+            flowLayoutPanel2.Location = new Point(6, 551);
             flowLayoutPanel2.Name = "flowLayoutPanel2";
             flowLayoutPanel2.Size = new Size(438, 35);
             flowLayoutPanel2.TabIndex = 0;
@@ -952,7 +952,7 @@
             // 
             AutoScaleDimensions = new SizeF(7F, 17F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(684, 973);
+            ClientSize = new Size(684, 849);
             Controls.Add(MainSC);
             Controls.Add(MainMS);
             DarkMode = true;
