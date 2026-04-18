@@ -42,7 +42,8 @@ namespace MergeDatRom.Services
                         new XElement("UseSquareBrackets", mergeSettings.UseSquareBrackets),
                         new XElement("UseBrackets", mergeSettings.UseBrackets),
                         new XElement("GlobalIncludeTags", mergeSettings.GlobalIncludeTags),
-                        new XElement("GlobalExcludeTags", mergeSettings.GlobalExcludeTags)
+                        new XElement("GlobalExcludeTags", mergeSettings.GlobalExcludeTags),
+                        new XElement("PreserveMultiDisc", mergeSettings.PreserveMultiDisc)
                     ),
                     new XElement("SourceDats",
                         datMetadatas.Select(d => new XElement("Dat",

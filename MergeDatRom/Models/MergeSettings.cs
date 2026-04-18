@@ -13,5 +13,6 @@ namespace MergeDatRom.Models
         public bool UseBrackets { get; set; }
         public string GlobalIncludeTags { get; set; }
         public string GlobalExcludeTags { get; set; }
+        public bool PreserveMultiDisc { get; set; }
     }
 }

@@ -190,5 +190,17 @@ namespace MergeDatRom.Properties {
                 this["DefaultTagPosition"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool PreserveMultiDisc {
+            get {
+                return ((bool)(this["PreserveMultiDisc"]));
+            }
+            set {
+                this["PreserveMultiDisc"] = value;
+            }
+        }
     }
 }

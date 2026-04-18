@@ -52,6 +52,7 @@
             label7 = new stigzler.Winforms.Base.UIElements.Label();
             TagPositionCB = new stigzler.Winforms.Base.UIElements.ComboBox();
             groupBox3 = new stigzler.Winforms.Base.UIElements.GroupBox();
+            PreserveMultiDiscFormatsChB = new stigzler.Winforms.Base.UIElements.CheckBox();
             label10 = new stigzler.Winforms.Base.UIElements.Label();
             label9 = new stigzler.Winforms.Base.UIElements.Label();
             ExcludeTagsTB = new stigzler.Winforms.Base.UIElements.TextBox();
@@ -76,7 +77,6 @@
             MergeBT = new stigzler.Winforms.Base.UIElements.Button();
             LoadSetupBT = new stigzler.Winforms.Base.UIElements.Button();
             SetDefaultsBT = new stigzler.Winforms.Base.UIElements.Button();
-            PreserveMultiDiscFormatsChB = new stigzler.Winforms.Base.UIElements.CheckBox();
             MainMS.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)MainSC).BeginInit();
             MainSC.Panel1.SuspendLayout();
@@ -492,6 +492,22 @@
             groupBox3.TabStop = false;
             groupBox3.Text = "Merge Settings";
             groupBox3.TitleColor = Color.FromArgb(220, 220, 220);
+            // 
+            // PreserveMultiDiscFormatsChB
+            // 
+            PreserveMultiDiscFormatsChB.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
+            PreserveMultiDiscFormatsChB.Location = new Point(130, 177);
+            PreserveMultiDiscFormatsChB.Name = "PreserveMultiDiscFormatsChB";
+            PreserveMultiDiscFormatsChB.OverrideTheme = false;
+            PreserveMultiDiscFormatsChB.Size = new Size(294, 24);
+            PreserveMultiDiscFormatsChB.TabIndex = 17;
+            PreserveMultiDiscFormatsChB.Text = "Preserve Multi-disc Formats";
+            PreserveMultiDiscFormatsChB.ToolTip = MainTT;
+            PreserveMultiDiscFormatsChB.ToolTipHorizontalAlignment = HorizontalAlignment.Right;
+            PreserveMultiDiscFormatsChB.ToolTipImage = null;
+            PreserveMultiDiscFormatsChB.ToolTipText = null;
+            PreserveMultiDiscFormatsChB.ToolTipTitle = null;
+            PreserveMultiDiscFormatsChB.UseVisualStyleBackColor = true;
             // 
             // label10
             // 
@@ -931,22 +947,6 @@
             SetDefaultsBT.ToolTipTitle = null;
             SetDefaultsBT.UseVisualStyleBackColor = false;
             SetDefaultsBT.Click += SetDefaultsBT_Click;
-            // 
-            // PreserveMultiDiscFormatsChB
-            // 
-            PreserveMultiDiscFormatsChB.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
-            PreserveMultiDiscFormatsChB.Location = new Point(130, 177);
-            PreserveMultiDiscFormatsChB.Name = "PreserveMultiDiscFormatsChB";
-            PreserveMultiDiscFormatsChB.OverrideTheme = false;
-            PreserveMultiDiscFormatsChB.Size = new Size(294, 24);
-            PreserveMultiDiscFormatsChB.TabIndex = 17;
-            PreserveMultiDiscFormatsChB.Text = "Preserve Multi-disc Formats";
-            PreserveMultiDiscFormatsChB.ToolTip = MainTT;
-            PreserveMultiDiscFormatsChB.ToolTipHorizontalAlignment = HorizontalAlignment.Right;
-            PreserveMultiDiscFormatsChB.ToolTipImage = null;
-            PreserveMultiDiscFormatsChB.ToolTipText = null;
-            PreserveMultiDiscFormatsChB.ToolTipTitle = null;
-            PreserveMultiDiscFormatsChB.UseVisualStyleBackColor = true;
             // 
             // Main
             // 

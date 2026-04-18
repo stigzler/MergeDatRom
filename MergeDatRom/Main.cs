@@ -32,6 +32,7 @@ namespace MergeDatRom
             bool stripTags = StripTagsChB.Checked;
             bool useSquareBrackets = UseTagSquareChB.Checked;
             bool useBrackets = UseTagBracketChB.Checked;
+            bool preserveMultiDisc = PreserveMultiDiscFormatsChB.Checked;
             string globalExcludeTags = ExcludeTagsTB.Text;
             string globalIncludeTags = IncludeTagsTB.Text;
 
@@ -58,7 +59,6 @@ namespace MergeDatRom
                 }
                 var excludeTagPatterns = ParseExcludeTags(combinedExcludeTags);
 
-
                 foreach (var gameNode in doc.Descendants("game"))
                 {
                     string originalGameName = gameNode.Attribute("name")?.Value ?? "Unknown";
@@ -75,6 +75,11 @@ namespace MergeDatRom
 
                     // Grouping
                     string gameName = stripTags ? GetGameBaseName(originalGameName) : originalGameName;
+                    if (preserveMultiDisc && IsMultiDisc(originalGameName))
+                    {
+                        gameName = originalGameName;
+                    }
+
                     if (!gamesInCurrentDat.ContainsKey(gameName))
                     {
                         gamesInCurrentDat[gameName] = new List<XElement>();
@@ -177,7 +182,8 @@ namespace MergeDatRom
                 UseSquareBrackets = UseTagSquareChB.Checked,
                 UseBrackets = UseTagBracketChB.Checked,
                 GlobalIncludeTags = IncludeTagsTB.Text,
-                GlobalExcludeTags = ExcludeTagsTB.Text
+                GlobalExcludeTags = ExcludeTagsTB.Text,
+                PreserveMultiDisc = PreserveMultiDiscFormatsChB.Checked
             };
 
             bool success = _datMetadataService.CreateMergedDatFile(sortedNameGroups, sfd.FileName, MergeDatNameTB.Text,
@@ -409,6 +415,7 @@ namespace MergeDatRom
             AlsoTagDescChB.Checked = Properties.Settings.Default.DefaultAlsoTagDesc;
             OpenFileAfterCreatedChB.Checked = Properties.Settings.Default.OPenFileAfterCreated;
             StripTagsChB.Checked = Properties.Settings.Default.StripTagsForMatch;
+            PreserveMultiDiscFormatsChB.Checked = Properties.Settings.Default.PreserveMultiDisc;
             UseTagBracketChB.Checked = Properties.Settings.Default.IncludeBracketTags;
             UseTagSquareChB.Checked = Properties.Settings.Default.IncludeSquareTags;
             MethodCB.Text = Properties.Settings.Default.DefaultMethod;
@@ -469,6 +476,7 @@ namespace MergeDatRom
             Properties.Settings.Default.DefaultAlsoTagDesc = AlsoTagDescChB.Checked;
             Properties.Settings.Default.OPenFileAfterCreated = OpenFileAfterCreatedChB.Checked;
             Properties.Settings.Default.StripTagsForMatch = StripTagsChB.Checked;
+            Properties.Settings.Default.PreserveMultiDisc = PreserveMultiDiscFormatsChB.Checked;
             Properties.Settings.Default.IncludeSquareTags = UseTagSquareChB.Checked;
             Properties.Settings.Default.IncludeBracketTags = UseTagBracketChB.Checked;
             Properties.Settings.Default.DefaultMethod = MethodCB.Text;
@@ -550,6 +558,12 @@ namespace MergeDatRom
             }
 
             return name; // Return original name if no tags found
+        }
+
+        private bool IsMultiDisc(string gameName)
+        {
+            // Regex to detect (Disk...), (Disc...), or (Side...) tags. Case-insensitive.
+            return Regex.IsMatch(gameName, @"\((Disk|Disc|Side)", RegexOptions.IgnoreCase);
         }
 
         private void StripTagsChB_CheckedChanged(object sender, EventArgs e)
@@ -636,6 +650,7 @@ namespace MergeDatRom
                 StripTagsChB.Checked = bool.Parse(globalSettings.Element("StripTagsForMatching")?.Value ?? "false");
                 UseTagSquareChB.Checked = bool.Parse(globalSettings.Element("UseSquareBrackets")?.Value ?? "false");
                 UseTagBracketChB.Checked = bool.Parse(globalSettings.Element("UseBrackets")?.Value ?? "false");
+                PreserveMultiDiscFormatsChB.Checked = bool.Parse(globalSettings.Element("PreserveMultiDisc")?.Value ?? "false");
                 IncludeTagsTB.Text = globalSettings.Element("GlobalIncludeTags")?.Value ?? string.Empty;
                 ExcludeTagsTB.Text = globalSettings.Element("GlobalExcludeTags")?.Value ?? string.Empty;
             }
