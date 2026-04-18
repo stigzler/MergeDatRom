@@ -69,6 +69,7 @@
             MergeDatNameTB = new stigzler.Winforms.Base.UIElements.TextBox();
             flowLayoutPanel2 = new stigzler.Winforms.Base.UIElements.FlowLayoutPanel();
             MergeBT = new stigzler.Winforms.Base.UIElements.Button();
+            LoadSetupBT = new stigzler.Winforms.Base.UIElements.Button();
             MainMS.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)MainSC).BeginInit();
             MainSC.Panel1.SuspendLayout();
@@ -757,6 +758,7 @@
             flowLayoutPanel2.BackColor = Color.FromArgb(35, 35, 35);
             flowLayoutPanel2.BackgroundShadeFactor = 1D;
             flowLayoutPanel2.Controls.Add(MergeBT);
+            flowLayoutPanel2.Controls.Add(LoadSetupBT);
             flowLayoutPanel2.Dock = DockStyle.Bottom;
             flowLayoutPanel2.FlowDirection = FlowDirection.RightToLeft;
             flowLayoutPanel2.ForeColor = Color.FromArgb(220, 220, 220);
@@ -789,6 +791,30 @@
             MergeBT.ToolTipTitle = null;
             MergeBT.UseVisualStyleBackColor = false;
             MergeBT.Click += MergeBT_Click;
+            // 
+            // LoadSetupBT
+            // 
+            LoadSetupBT.AutoSize = true;
+            LoadSetupBT.BackColor = Color.FromArgb(55, 55, 55);
+            LoadSetupBT.DefocusOnClick = true;
+            LoadSetupBT.DisabledBackColor = Color.FromArgb(30, 30, 30);
+            LoadSetupBT.DisabledBorderColor = Color.FromArgb(60, 60, 60);
+            LoadSetupBT.DisabledForeColor = Color.FromArgb(125, 125, 125);
+            LoadSetupBT.Dock = DockStyle.Bottom;
+            LoadSetupBT.FlatAppearance.BorderColor = Color.FromArgb(100, 100, 100);
+            LoadSetupBT.FlatAppearance.MouseOverBackColor = Color.FromArgb(0, 102, 215);
+            LoadSetupBT.FlatStyle = FlatStyle.Flat;
+            LoadSetupBT.ForeColor = Color.FromArgb(240, 240, 240);
+            LoadSetupBT.Location = new Point(251, 3);
+            LoadSetupBT.Name = "LoadSetupBT";
+            LoadSetupBT.Size = new Size(89, 29);
+            LoadSetupBT.TabIndex = 2;
+            LoadSetupBT.Text = "Load Setup";
+            LoadSetupBT.ToolTip = MainTT;
+            LoadSetupBT.ToolTipImage = null;
+            LoadSetupBT.ToolTipText = null;
+            LoadSetupBT.ToolTipTitle = null;
+            LoadSetupBT.UseVisualStyleBackColor = false;
             // 
             // Main
             // 
@@ -877,5 +903,6 @@
         private stigzler.Winforms.Base.UIElements.Label label8;
         private stigzler.Winforms.Base.UIElements.CheckBox UseTagBracketChB;
         private stigzler.Winforms.Base.UIElements.CheckBox UseTagSquareChB;
+        private stigzler.Winforms.Base.UIElements.Button LoadSetupBT;
     }
 }
