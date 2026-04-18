@@ -46,17 +46,22 @@
             MainPG = new stigzler.Winforms.Base.UIElements.PropertyGrid();
             label1 = new Label();
             groupBox2 = new stigzler.Winforms.Base.UIElements.GroupBox();
-            label8 = new stigzler.Winforms.Base.UIElements.Label();
-            MainTT = new stigzler.Winforms.Base.UIElements.ToolTip(components);
-            UseTagBracketChB = new stigzler.Winforms.Base.UIElements.CheckBox();
-            UseTagSquareChB = new stigzler.Winforms.Base.UIElements.CheckBox();
-            StripTagsChB = new stigzler.Winforms.Base.UIElements.CheckBox();
             AlsoTagDescChB = new stigzler.Winforms.Base.UIElements.CheckBox();
+            MainTT = new stigzler.Winforms.Base.UIElements.ToolTip(components);
             OpenFileAfterCreatedChB = new stigzler.Winforms.Base.UIElements.CheckBox();
             label7 = new stigzler.Winforms.Base.UIElements.Label();
-            MethodCB = new stigzler.Winforms.Base.UIElements.ComboBox();
             TagPositionCB = new stigzler.Winforms.Base.UIElements.ComboBox();
+            groupBox3 = new stigzler.Winforms.Base.UIElements.GroupBox();
+            label10 = new stigzler.Winforms.Base.UIElements.Label();
+            label9 = new stigzler.Winforms.Base.UIElements.Label();
+            ExcludeTagsTB = new stigzler.Winforms.Base.UIElements.TextBox();
+            IncludeTagsTB = new stigzler.Winforms.Base.UIElements.TextBox();
+            UseTagBracketChB = new stigzler.Winforms.Base.UIElements.CheckBox();
+            label8 = new stigzler.Winforms.Base.UIElements.Label();
+            UseTagSquareChB = new stigzler.Winforms.Base.UIElements.CheckBox();
             label6 = new stigzler.Winforms.Base.UIElements.Label();
+            MethodCB = new stigzler.Winforms.Base.UIElements.ComboBox();
+            StripTagsChB = new stigzler.Winforms.Base.UIElements.CheckBox();
             WarningLB = new Label();
             groupBox1 = new stigzler.Winforms.Base.UIElements.GroupBox();
             label5 = new stigzler.Winforms.Base.UIElements.Label();
@@ -84,6 +89,7 @@
             RhsSC.SuspendLayout();
             PgPN.SuspendLayout();
             groupBox2.SuspendLayout();
+            groupBox3.SuspendLayout();
             groupBox1.SuspendLayout();
             flowLayoutPanel2.SuspendLayout();
             SuspendLayout();
@@ -146,7 +152,7 @@
             MainSC.Panel2.BackColor = Color.FromArgb(35, 35, 35);
             MainSC.Panel2.Controls.Add(RhsSC);
             MainSC.Panel2.ForeColor = Color.FromArgb(220, 220, 220);
-            MainSC.Size = new Size(676, 849);
+            MainSC.Size = new Size(676, 816);
             MainSC.SplitterDistance = 222;
             MainSC.TabIndex = 3;
             // 
@@ -162,7 +168,7 @@
             ListboxPN.Margin = new Padding(2, 3, 2, 3);
             ListboxPN.Name = "ListboxPN";
             ListboxPN.Padding = new Padding(3);
-            ListboxPN.Size = new Size(222, 814);
+            ListboxPN.Size = new Size(222, 781);
             ListboxPN.TabIndex = 3;
             // 
             // MainLB
@@ -175,7 +181,7 @@
             MainLB.FormattingEnabled = true;
             MainLB.Location = new Point(3, 3);
             MainLB.Name = "MainLB";
-            MainLB.Size = new Size(214, 806);
+            MainLB.Size = new Size(214, 773);
             MainLB.TabIndex = 2;
             MainLB.SelectedIndexChanged += MainLB_SelectedIndexChanged;
             MainLB.SelectedValueChanged += MainLB_SelectedValueChanged;
@@ -191,7 +197,7 @@
             flowLayoutPanel1.Dock = DockStyle.Bottom;
             flowLayoutPanel1.FlowDirection = FlowDirection.RightToLeft;
             flowLayoutPanel1.ForeColor = Color.FromArgb(220, 220, 220);
-            flowLayoutPanel1.Location = new Point(0, 814);
+            flowLayoutPanel1.Location = new Point(0, 781);
             flowLayoutPanel1.Name = "flowLayoutPanel1";
             flowLayoutPanel1.Size = new Size(222, 35);
             flowLayoutPanel1.TabIndex = 1;
@@ -286,13 +292,14 @@
             // 
             RhsSC.Panel2.BackColor = Color.FromArgb(35, 35, 35);
             RhsSC.Panel2.Controls.Add(groupBox2);
+            RhsSC.Panel2.Controls.Add(groupBox3);
             RhsSC.Panel2.Controls.Add(WarningLB);
             RhsSC.Panel2.Controls.Add(groupBox1);
             RhsSC.Panel2.Controls.Add(flowLayoutPanel2);
             RhsSC.Panel2.ForeColor = Color.FromArgb(220, 220, 220);
             RhsSC.Panel2.Padding = new Padding(6);
-            RhsSC.Size = new Size(450, 849);
-            RhsSC.SplitterDistance = 274;
+            RhsSC.Size = new Size(450, 816);
+            RhsSC.SplitterDistance = 263;
             RhsSC.TabIndex = 0;
             // 
             // PgPN
@@ -306,7 +313,7 @@
             PgPN.Margin = new Padding(2);
             PgPN.Name = "PgPN";
             PgPN.Padding = new Padding(3);
-            PgPN.Size = new Size(450, 245);
+            PgPN.Size = new Size(450, 234);
             PgPN.TabIndex = 2;
             // 
             // MainPG
@@ -322,7 +329,7 @@
             MainPG.Location = new Point(3, 3);
             MainPG.Margin = new Padding(5);
             MainPG.Name = "MainPG";
-            MainPG.Size = new Size(444, 239);
+            MainPG.Size = new Size(444, 228);
             MainPG.TabIndex = 0;
             MainPG.ToolbarVisible = false;
             MainPG.ViewBackColor = Color.FromArgb(30, 30, 30);
@@ -345,45 +352,38 @@
             groupBox2.BorderColor = Color.FromArgb(100, 100, 100);
             groupBox2.BorderStyle = System.Drawing.Drawing2D.DashStyle.Solid;
             groupBox2.BorderThickness = 1;
-            groupBox2.Controls.Add(label8);
-            groupBox2.Controls.Add(UseTagBracketChB);
-            groupBox2.Controls.Add(UseTagSquareChB);
-            groupBox2.Controls.Add(StripTagsChB);
             groupBox2.Controls.Add(AlsoTagDescChB);
             groupBox2.Controls.Add(OpenFileAfterCreatedChB);
             groupBox2.Controls.Add(label7);
-            groupBox2.Controls.Add(MethodCB);
             groupBox2.Controls.Add(TagPositionCB);
-            groupBox2.Controls.Add(label6);
             groupBox2.Dock = DockStyle.Top;
             groupBox2.ForeColor = Color.FromArgb(220, 220, 220);
-            groupBox2.Location = new Point(6, 173);
+            groupBox2.Location = new Point(6, 356);
             groupBox2.Margin = new Padding(2);
             groupBox2.Name = "groupBox2";
             groupBox2.Padding = new Padding(2);
-            groupBox2.Size = new Size(438, 204);
+            groupBox2.Size = new Size(438, 112);
             groupBox2.TabIndex = 3;
             groupBox2.TabStop = false;
-            groupBox2.Text = "Merge Settings";
+            groupBox2.Text = "Output";
             groupBox2.TitleColor = Color.FromArgb(220, 220, 220);
             // 
-            // label8
+            // AlsoTagDescChB
             // 
-            label8.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            label8.FontStyle = FontStyle.Regular;
-            label8.ForeColor = Color.FromArgb(220, 220, 220);
-            label8.Location = new Point(12, 170);
-            label8.Name = "label8";
-            label8.ScaleFont = 100;
-            label8.Size = new Size(94, 23);
-            label8.TabIndex = 12;
-            label8.Text = "Tags to use:";
-            label8.TextAlign = ContentAlignment.MiddleRight;
-            label8.ToolTip = MainTT;
-            label8.ToolTipHorizontalAlignment = HorizontalAlignment.Right;
-            label8.ToolTipImage = null;
-            label8.ToolTipText = null;
-            label8.ToolTipTitle = null;
+            AlsoTagDescChB.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
+            AlsoTagDescChB.Location = new Point(120, 52);
+            AlsoTagDescChB.Name = "AlsoTagDescChB";
+            AlsoTagDescChB.OverrideTheme = false;
+            AlsoTagDescChB.Size = new Size(307, 24);
+            AlsoTagDescChB.TabIndex = 8;
+            AlsoTagDescChB.Tag = "";
+            AlsoTagDescChB.Text = "Also Tag Description";
+            AlsoTagDescChB.ToolTip = MainTT;
+            AlsoTagDescChB.ToolTipHorizontalAlignment = HorizontalAlignment.Right;
+            AlsoTagDescChB.ToolTipImage = null;
+            AlsoTagDescChB.ToolTipText = "If a tagging Method is selected whether to also tag the description element";
+            AlsoTagDescChB.ToolTipTitle = null;
+            AlsoTagDescChB.UseVisualStyleBackColor = true;
             // 
             // MainTT
             // 
@@ -411,72 +411,9 @@
             MainTT.ToolTipTitle = "Info";
             MainTT.Width = 128;
             // 
-            // UseTagBracketChB
-            // 
-            UseTagBracketChB.Location = new Point(185, 171);
-            UseTagBracketChB.Name = "UseTagBracketChB";
-            UseTagBracketChB.OverrideTheme = false;
-            UseTagBracketChB.Size = new Size(62, 24);
-            UseTagBracketChB.TabIndex = 11;
-            UseTagBracketChB.Text = "\"( )\"";
-            UseTagBracketChB.ToolTip = MainTT;
-            UseTagBracketChB.ToolTipHorizontalAlignment = HorizontalAlignment.Right;
-            UseTagBracketChB.ToolTipImage = null;
-            UseTagBracketChB.ToolTipText = null;
-            UseTagBracketChB.ToolTipTitle = null;
-            UseTagBracketChB.UseVisualStyleBackColor = true;
-            // 
-            // UseTagSquareChB
-            // 
-            UseTagSquareChB.Location = new Point(117, 171);
-            UseTagSquareChB.Name = "UseTagSquareChB";
-            UseTagSquareChB.OverrideTheme = false;
-            UseTagSquareChB.Size = new Size(62, 24);
-            UseTagSquareChB.TabIndex = 10;
-            UseTagSquareChB.Text = "\"[ ]\"";
-            UseTagSquareChB.ToolTip = MainTT;
-            UseTagSquareChB.ToolTipHorizontalAlignment = HorizontalAlignment.Right;
-            UseTagSquareChB.ToolTipImage = null;
-            UseTagSquareChB.ToolTipText = null;
-            UseTagSquareChB.ToolTipTitle = null;
-            UseTagSquareChB.UseVisualStyleBackColor = true;
-            // 
-            // StripTagsChB
-            // 
-            StripTagsChB.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
-            StripTagsChB.Location = new Point(117, 141);
-            StripTagsChB.Name = "StripTagsChB";
-            StripTagsChB.OverrideTheme = false;
-            StripTagsChB.Size = new Size(307, 24);
-            StripTagsChB.TabIndex = 9;
-            StripTagsChB.Text = "Strip Tags for matching";
-            StripTagsChB.ToolTip = MainTT;
-            StripTagsChB.ToolTipHorizontalAlignment = HorizontalAlignment.Right;
-            StripTagsChB.ToolTipImage = null;
-            StripTagsChB.ToolTipText = "Use to consdier just game names without the tags (useful with TOSEC). Accomodates different dates.";
-            StripTagsChB.ToolTipTitle = null;
-            StripTagsChB.UseVisualStyleBackColor = true;
-            // 
-            // AlsoTagDescChB
-            // 
-            AlsoTagDescChB.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
-            AlsoTagDescChB.Location = new Point(117, 81);
-            AlsoTagDescChB.Name = "AlsoTagDescChB";
-            AlsoTagDescChB.OverrideTheme = false;
-            AlsoTagDescChB.Size = new Size(307, 24);
-            AlsoTagDescChB.TabIndex = 8;
-            AlsoTagDescChB.Tag = "";
-            AlsoTagDescChB.Text = "Also Tag Description";
-            AlsoTagDescChB.ToolTip = MainTT;
-            AlsoTagDescChB.ToolTipHorizontalAlignment = HorizontalAlignment.Right;
-            AlsoTagDescChB.ToolTipImage = null;
-            AlsoTagDescChB.ToolTipText = "If a tagging Method is selected whether to also tag the description element";
-            AlsoTagDescChB.ToolTipTitle = null;
-            AlsoTagDescChB.UseVisualStyleBackColor = true;
-            // 
             // OpenFileAfterCreatedChB
             // 
-            OpenFileAfterCreatedChB.Location = new Point(117, 111);
+            OpenFileAfterCreatedChB.Location = new Point(120, 82);
             OpenFileAfterCreatedChB.Name = "OpenFileAfterCreatedChB";
             OpenFileAfterCreatedChB.OverrideTheme = false;
             OpenFileAfterCreatedChB.Size = new Size(305, 24);
@@ -494,7 +431,7 @@
             label7.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
             label7.FontStyle = FontStyle.Regular;
             label7.ForeColor = Color.FromArgb(220, 220, 220);
-            label7.Location = new Point(6, 49);
+            label7.Location = new Point(11, 20);
             label7.Margin = new Padding(2, 0, 2, 0);
             label7.Name = "label7";
             label7.ScaleFont = 100;
@@ -508,27 +445,6 @@
             label7.ToolTipText = null;
             label7.ToolTipTitle = null;
             // 
-            // MethodCB
-            // 
-            MethodCB.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
-            MethodCB.ArrowColor = Color.FromArgb(230, 230, 230);
-            MethodCB.BackColor = Color.FromArgb(30, 30, 30);
-            MethodCB.BorderColor = Color.FromArgb(100, 100, 100);
-            MethodCB.ButtonColor = Color.FromArgb(60, 60, 60);
-            MethodCB.DropDownStyle = ComboBoxStyle.DropDownList;
-            MethodCB.FlatStyle = FlatStyle.Flat;
-            MethodCB.ForeColor = Color.FromArgb(220, 220, 220);
-            MethodCB.FormattingEnabled = true;
-            MethodCB.ImageSize = new Size(0, 0);
-            MethodCB.Location = new Point(117, 22);
-            MethodCB.Margin = new Padding(2);
-            MethodCB.Name = "MethodCB";
-            MethodCB.SelectedColor = SystemColors.Highlight;
-            MethodCB.Size = new Size(307, 25);
-            MethodCB.TabIndex = 1;
-            MethodCB.TextEmphasisColor = Color.White;
-            MethodCB.TextEmphasisFont = new Font("Segoe UI", 9.75F, FontStyle.Bold);
-            // 
             // TagPositionCB
             // 
             TagPositionCB.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
@@ -541,21 +457,160 @@
             TagPositionCB.ForeColor = Color.FromArgb(220, 220, 220);
             TagPositionCB.FormattingEnabled = true;
             TagPositionCB.ImageSize = new Size(0, 0);
-            TagPositionCB.Location = new Point(117, 51);
+            TagPositionCB.Location = new Point(120, 22);
             TagPositionCB.Margin = new Padding(2);
             TagPositionCB.Name = "TagPositionCB";
             TagPositionCB.SelectedColor = SystemColors.Highlight;
-            TagPositionCB.Size = new Size(307, 25);
+            TagPositionCB.Size = new Size(304, 25);
             TagPositionCB.TabIndex = 4;
             TagPositionCB.TextEmphasisColor = Color.White;
             TagPositionCB.TextEmphasisFont = new Font("Segoe UI", 9.75F, FontStyle.Bold);
+            // 
+            // groupBox3
+            // 
+            groupBox3.BorderColor = Color.FromArgb(100, 100, 100);
+            groupBox3.BorderStyle = System.Drawing.Drawing2D.DashStyle.Solid;
+            groupBox3.BorderThickness = 1;
+            groupBox3.Controls.Add(label10);
+            groupBox3.Controls.Add(label9);
+            groupBox3.Controls.Add(ExcludeTagsTB);
+            groupBox3.Controls.Add(IncludeTagsTB);
+            groupBox3.Controls.Add(UseTagBracketChB);
+            groupBox3.Controls.Add(label8);
+            groupBox3.Controls.Add(UseTagSquareChB);
+            groupBox3.Controls.Add(label6);
+            groupBox3.Controls.Add(MethodCB);
+            groupBox3.Controls.Add(StripTagsChB);
+            groupBox3.Dock = DockStyle.Top;
+            groupBox3.ForeColor = Color.FromArgb(220, 220, 220);
+            groupBox3.Location = new Point(6, 173);
+            groupBox3.Name = "groupBox3";
+            groupBox3.Size = new Size(438, 183);
+            groupBox3.TabIndex = 4;
+            groupBox3.TabStop = false;
+            groupBox3.Text = "Merge Settings";
+            groupBox3.TitleColor = Color.FromArgb(220, 220, 220);
+            // 
+            // label10
+            // 
+            label10.Font = new Font("Segoe UI", 12F);
+            label10.FontStyle = FontStyle.Regular;
+            label10.ForeColor = Color.FromArgb(220, 220, 220);
+            label10.Location = new Point(13, 87);
+            label10.Name = "label10";
+            label10.ScaleFont = 100;
+            label10.Size = new Size(113, 23);
+            label10.TabIndex = 16;
+            label10.Text = "Exclude Tags:";
+            label10.TextAlign = ContentAlignment.MiddleRight;
+            label10.ToolTip = MainTT;
+            label10.ToolTipHorizontalAlignment = HorizontalAlignment.Right;
+            label10.ToolTipImage = null;
+            label10.ToolTipText = null;
+            label10.ToolTipTitle = null;
+            // 
+            // label9
+            // 
+            label9.Font = new Font("Segoe UI", 12F);
+            label9.FontStyle = FontStyle.Regular;
+            label9.ForeColor = Color.FromArgb(220, 220, 220);
+            label9.Location = new Point(26, 56);
+            label9.Name = "label9";
+            label9.ScaleFont = 100;
+            label9.Size = new Size(100, 23);
+            label9.TabIndex = 15;
+            label9.Text = "Include Tags:";
+            label9.TextAlign = ContentAlignment.MiddleRight;
+            label9.ToolTip = MainTT;
+            label9.ToolTipHorizontalAlignment = HorizontalAlignment.Right;
+            label9.ToolTipImage = null;
+            label9.ToolTipText = null;
+            label9.ToolTipTitle = null;
+            // 
+            // ExcludeTagsTB
+            // 
+            ExcludeTagsTB.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
+            ExcludeTagsTB.BackColor = Color.FromArgb(30, 30, 30);
+            ExcludeTagsTB.BorderStyle = BorderStyle.FixedSingle;
+            ExcludeTagsTB.Cue = null;
+            ExcludeTagsTB.Font = new Font("Segoe UI", 9.75F);
+            ExcludeTagsTB.FontStyle = FontStyle.Regular;
+            ExcludeTagsTB.ForeColor = Color.FromArgb(220, 220, 220);
+            ExcludeTagsTB.Location = new Point(130, 86);
+            ExcludeTagsTB.Name = "ExcludeTagsTB";
+            ExcludeTagsTB.ScaleFont = 100;
+            ExcludeTagsTB.Size = new Size(294, 25);
+            ExcludeTagsTB.TabIndex = 14;
+            // 
+            // IncludeTagsTB
+            // 
+            IncludeTagsTB.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
+            IncludeTagsTB.BackColor = Color.FromArgb(30, 30, 30);
+            IncludeTagsTB.BorderStyle = BorderStyle.FixedSingle;
+            IncludeTagsTB.Cue = null;
+            IncludeTagsTB.Font = new Font("Segoe UI", 9.75F);
+            IncludeTagsTB.FontStyle = FontStyle.Regular;
+            IncludeTagsTB.ForeColor = Color.FromArgb(220, 220, 220);
+            IncludeTagsTB.Location = new Point(130, 55);
+            IncludeTagsTB.Name = "IncludeTagsTB";
+            IncludeTagsTB.ScaleFont = 100;
+            IncludeTagsTB.Size = new Size(294, 25);
+            IncludeTagsTB.TabIndex = 13;
+            // 
+            // UseTagBracketChB
+            // 
+            UseTagBracketChB.Location = new Point(192, 147);
+            UseTagBracketChB.Name = "UseTagBracketChB";
+            UseTagBracketChB.OverrideTheme = false;
+            UseTagBracketChB.Size = new Size(62, 24);
+            UseTagBracketChB.TabIndex = 11;
+            UseTagBracketChB.Text = "\"( )\"";
+            UseTagBracketChB.ToolTip = MainTT;
+            UseTagBracketChB.ToolTipHorizontalAlignment = HorizontalAlignment.Right;
+            UseTagBracketChB.ToolTipImage = null;
+            UseTagBracketChB.ToolTipText = null;
+            UseTagBracketChB.ToolTipTitle = null;
+            UseTagBracketChB.UseVisualStyleBackColor = true;
+            // 
+            // label8
+            // 
+            label8.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            label8.FontStyle = FontStyle.Regular;
+            label8.ForeColor = Color.FromArgb(220, 220, 220);
+            label8.Location = new Point(11, 146);
+            label8.Name = "label8";
+            label8.ScaleFont = 100;
+            label8.Size = new Size(112, 23);
+            label8.TabIndex = 12;
+            label8.Text = "Tags to filter:";
+            label8.TextAlign = ContentAlignment.MiddleRight;
+            label8.ToolTip = MainTT;
+            label8.ToolTipHorizontalAlignment = HorizontalAlignment.Right;
+            label8.ToolTipImage = null;
+            label8.ToolTipText = null;
+            label8.ToolTipTitle = null;
+            // 
+            // UseTagSquareChB
+            // 
+            UseTagSquareChB.Location = new Point(130, 147);
+            UseTagSquareChB.Name = "UseTagSquareChB";
+            UseTagSquareChB.OverrideTheme = false;
+            UseTagSquareChB.Size = new Size(56, 24);
+            UseTagSquareChB.TabIndex = 10;
+            UseTagSquareChB.Text = "\"[ ]\"";
+            UseTagSquareChB.ToolTip = MainTT;
+            UseTagSquareChB.ToolTipHorizontalAlignment = HorizontalAlignment.Right;
+            UseTagSquareChB.ToolTipImage = null;
+            UseTagSquareChB.ToolTipText = null;
+            UseTagSquareChB.ToolTipTitle = null;
+            UseTagSquareChB.UseVisualStyleBackColor = true;
             // 
             // label6
             // 
             label6.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
             label6.FontStyle = FontStyle.Regular;
             label6.ForeColor = Color.FromArgb(220, 220, 220);
-            label6.Location = new Point(6, 20);
+            label6.Location = new Point(26, 23);
             label6.Margin = new Padding(2, 0, 2, 0);
             label6.Name = "label6";
             label6.ScaleFont = 100;
@@ -569,12 +624,49 @@
             label6.ToolTipText = null;
             label6.ToolTipTitle = null;
             // 
+            // MethodCB
+            // 
+            MethodCB.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
+            MethodCB.ArrowColor = Color.FromArgb(230, 230, 230);
+            MethodCB.BackColor = Color.FromArgb(30, 30, 30);
+            MethodCB.BorderColor = Color.FromArgb(100, 100, 100);
+            MethodCB.ButtonColor = Color.FromArgb(60, 60, 60);
+            MethodCB.DropDownStyle = ComboBoxStyle.DropDownList;
+            MethodCB.FlatStyle = FlatStyle.Flat;
+            MethodCB.ForeColor = Color.FromArgb(220, 220, 220);
+            MethodCB.FormattingEnabled = true;
+            MethodCB.ImageSize = new Size(0, 0);
+            MethodCB.Location = new Point(130, 25);
+            MethodCB.Margin = new Padding(2);
+            MethodCB.Name = "MethodCB";
+            MethodCB.SelectedColor = SystemColors.Highlight;
+            MethodCB.Size = new Size(294, 25);
+            MethodCB.TabIndex = 1;
+            MethodCB.TextEmphasisColor = Color.White;
+            MethodCB.TextEmphasisFont = new Font("Segoe UI", 9.75F, FontStyle.Bold);
+            // 
+            // StripTagsChB
+            // 
+            StripTagsChB.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
+            StripTagsChB.Location = new Point(130, 117);
+            StripTagsChB.Name = "StripTagsChB";
+            StripTagsChB.OverrideTheme = false;
+            StripTagsChB.Size = new Size(297, 24);
+            StripTagsChB.TabIndex = 9;
+            StripTagsChB.Text = "Strip Tags for Game Grouping\r\n";
+            StripTagsChB.ToolTip = MainTT;
+            StripTagsChB.ToolTipHorizontalAlignment = HorizontalAlignment.Right;
+            StripTagsChB.ToolTipImage = null;
+            StripTagsChB.ToolTipText = "Use to consdier just game names without the tags (useful with TOSEC). Accomodates different dates.";
+            StripTagsChB.ToolTipTitle = null;
+            StripTagsChB.UseVisualStyleBackColor = true;
+            // 
             // WarningLB
             // 
             WarningLB.Dock = DockStyle.Bottom;
             WarningLB.Image = Properties.Resources.exclamation__frame;
             WarningLB.ImageAlign = ContentAlignment.MiddleRight;
-            WarningLB.Location = new Point(6, 503);
+            WarningLB.Location = new Point(6, 481);
             WarningLB.Margin = new Padding(2, 0, 2, 0);
             WarningLB.Name = "WarningLB";
             WarningLB.Padding = new Padding(2, 2, 2, 6);
@@ -758,7 +850,7 @@
             flowLayoutPanel2.Dock = DockStyle.Bottom;
             flowLayoutPanel2.FlowDirection = FlowDirection.RightToLeft;
             flowLayoutPanel2.ForeColor = Color.FromArgb(220, 220, 220);
-            flowLayoutPanel2.Location = new Point(6, 530);
+            flowLayoutPanel2.Location = new Point(6, 508);
             flowLayoutPanel2.Name = "flowLayoutPanel2";
             flowLayoutPanel2.Size = new Size(438, 35);
             flowLayoutPanel2.TabIndex = 0;
@@ -842,7 +934,7 @@
             // 
             AutoScaleDimensions = new SizeF(7F, 17F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(684, 882);
+            ClientSize = new Size(684, 849);
             Controls.Add(MainSC);
             Controls.Add(MainMS);
             DarkMode = true;
@@ -850,7 +942,7 @@
             ForeColor = Color.FromArgb(220, 220, 220);
             Icon = (Icon)resources.GetObject("$this.Icon");
             MainMenuStrip = MainMS;
-            MinimumSize = new Size(700, 650);
+            MinimumSize = new Size(700, 888);
             Name = "Main";
             Padding = new Padding(4);
             RememberFormState = true;
@@ -876,6 +968,8 @@
             RhsSC.ResumeLayout(false);
             PgPN.ResumeLayout(false);
             groupBox2.ResumeLayout(false);
+            groupBox3.ResumeLayout(false);
+            groupBox3.PerformLayout();
             groupBox1.ResumeLayout(false);
             groupBox1.PerformLayout();
             flowLayoutPanel2.ResumeLayout(false);
@@ -927,5 +1021,10 @@
         private stigzler.Winforms.Base.UIElements.CheckBox UseTagSquareChB;
         private stigzler.Winforms.Base.UIElements.Button LoadSetupBT;
         private stigzler.Winforms.Base.UIElements.Button SetDefaultsBT;
+        private stigzler.Winforms.Base.UIElements.GroupBox groupBox3;
+        private stigzler.Winforms.Base.UIElements.Label label10;
+        private stigzler.Winforms.Base.UIElements.Label label9;
+        private stigzler.Winforms.Base.UIElements.TextBox ExcludeTagsTB;
+        private stigzler.Winforms.Base.UIElements.TextBox IncludeTagsTB;
     }
 }

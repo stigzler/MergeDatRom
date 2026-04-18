@@ -11,4 +11,7 @@
   <ItemGroup>
     <Folder Include="$(MSBuildThisFileDirectory)TestDats\" />
   </ItemGroup>
+  <ItemGroup>
+    <Content Include="$(MSBuildThisFileDirectory)Docs\changelog.txt" />
+  </ItemGroup>
 </Project>
