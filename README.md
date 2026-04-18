@@ -5,7 +5,8 @@ A small app to merge rom dats (eg. No-Intro, Redump and TOSEC) into a single .da
 Essentially, this either merges duplicate Game elements with Tags added to the game.name and/or game.description OR picks a priority entry to place into the final merged Dat. 
 
 ## Screenshot
-<img width="1186" height="654" alt="Screenshot 2026-04-17 110219" src="https://github.com/user-attachments/assets/3c956d9f-e313-4d73-a513-474b9d866f65" />
+<img width="1075" height="888" alt="Screenshot 2026-04-18 132525" src="https://github.com/user-attachments/assets/09f8187f-b0fb-4d28-8c3a-40511a9bc144" />
+
 
 
 ## Example Merged .DAT
