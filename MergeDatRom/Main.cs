@@ -5,6 +5,7 @@ using stigzler.Winforms.Base.Forms.BaseForm;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.Text.RegularExpressions;
+using System.Xml;
 using System.Xml.Linq;
 
 namespace MergeDatRom
@@ -134,8 +135,21 @@ namespace MergeDatRom
             // Sort the games alphabetically by name before saving
             var sortedNameGroups = new SortedDictionary<string, List<XElement>>(nameGroups, StringComparer.OrdinalIgnoreCase);
 
+            // Create MergeSettings object from UI
+            var mergeSettings = new MergeSettings
+            {
+                Method = (MergeType)MethodCB.SelectedItem,
+                TagPosition = (TagPosition)TagPositionCB.SelectedItem,
+                AlsoTagDesc = AlsoTagDescChB.Checked,
+                OpenFileAfterCreated = OpenFileAfterCreatedChB.Checked,
+                StripTagsForMatching = StripTagsChB.Checked,
+                UseSquareBrackets = UseTagSquareChB.Checked,
+                UseBrackets = UseTagBracketChB.Checked
+            };
+
             bool success = _datMetadataService.CreateMergedDatFile(sortedNameGroups, sfd.FileName, MergeDatNameTB.Text,
-                MergeDatDescTB.Text, MergeDatAuthorTB.Text, MergeDatCategoryTB.Text);
+                MergeDatDescTB.Text, MergeDatAuthorTB.Text, MergeDatCategoryTB.Text,
+                _datMetadatas, mergeSettings);
 
             if (success)
             {
@@ -161,11 +175,6 @@ namespace MergeDatRom
             {
                 SetWarning($"Merge failed. Please check the logs for details");
             }
-        }
-
-        private void AlsoTagDescChB_CheckedChanged(object sender, EventArgs e)
-        {
-            Properties.Settings.Default.DefaultAlsoTagDesc = AlsoTagDescChB.Checked;
         }
 
         private List<Regex> ParseExcludeTags(string tagsCsv)
@@ -367,6 +376,10 @@ namespace MergeDatRom
             AlsoTagDescChB.Checked = Properties.Settings.Default.DefaultAlsoTagDesc;
             OpenFileAfterCreatedChB.Checked = Properties.Settings.Default.OPenFileAfterCreated;
             StripTagsChB.Checked = Properties.Settings.Default.StripTagsForMatch;
+            UseTagBracketChB.Checked = Properties.Settings.Default.IncludeBracketTags;
+            UseTagSquareChB.Checked = Properties.Settings.Default.IncludeSquareTags;
+            MethodCB.Text = Properties.Settings.Default.DefaultMethod;
+            TagPositionCB.Text = Properties.Settings.Default.DefaultTagPosition;
 
             var version = System.Reflection.Assembly.GetExecutingAssembly().GetName().Version;
             VersionLB.Text = $"V{version.Major}.{version.Minor}.{version.Build}";
@@ -391,13 +404,13 @@ namespace MergeDatRom
 
             if (_datMetadatas.Count == 0)
             {
-                SetWarning($"No DAT files loaded. Please load DAT files before merging");
+                SetCritical($"No DAT files loaded. Please load DAT files before merging");
                 return;
             }
 
             if (_datMetadatas.Count < 2)
             {
-                SetWarning($"You need at least 2 Dats to merge");
+                SetCritical($"You need at least 2 Dats to merge");
                 return;
             }
 
@@ -406,7 +419,7 @@ namespace MergeDatRom
             if (mergeType != MergeType.KeepPriorityOnly && _datMetadatas.Any(meta => string.IsNullOrEmpty(meta.Tag)))
             {
                 WarningLB.Visible = true;
-                SetWarning($"Tag gamename selected, but not all tags are set. Please update");
+                SetCritical($"Tag gamename selected, but not all tags are set. Please update");
                 return;
             }
 
@@ -414,24 +427,19 @@ namespace MergeDatRom
             ProcessMerge(_datMetadatas, (MergeType)MethodCB.SelectedItem);
         }
 
-        private void MergeDatAuthorTB_TextChanged(object sender, EventArgs e)
-        {
-            Properties.Settings.Default.DefaultAuthor = MergeDatAuthorTB.Text;
-        }
-
-        private void MergeDatCategoryTB_TextChanged(object sender, EventArgs e)
-        {
-            Properties.Settings.Default.DefaultCategory = MergeDatCategoryTB.Text;
-        }
-
-        private void MergeDatDescTB_TextChanged(object sender, EventArgs e)
-        {
-            Properties.Settings.Default.DefaultDesc = MergeDatDescTB.Text;
-        }
-
-        private void MergeDatNameTB_TextChanged(object sender, EventArgs e)
+        private void SetDefaults()
         {
             Properties.Settings.Default.DefaultName = MergeDatNameTB.Text;
+            Properties.Settings.Default.DefaultDesc = MergeDatDescTB.Text;
+            Properties.Settings.Default.DefaultCategory = MergeDatCategoryTB.Text;
+            Properties.Settings.Default.DefaultAuthor = MergeDatAuthorTB.Text;
+            Properties.Settings.Default.DefaultAlsoTagDesc = AlsoTagDescChB.Checked;
+            Properties.Settings.Default.OPenFileAfterCreated = OpenFileAfterCreatedChB.Checked;
+            Properties.Settings.Default.StripTagsForMatch = StripTagsChB.Checked;
+            Properties.Settings.Default.IncludeSquareTags = UseTagSquareChB.Checked;
+            Properties.Settings.Default.IncludeBracketTags = UseTagBracketChB.Checked;
+            Properties.Settings.Default.DefaultMethod = MethodCB.Text;
+            Properties.Settings.Default.DefaultTagPosition = TagPositionCB.Text;
         }
 
         private void MoveSelectedDat(int direction)
@@ -458,11 +466,6 @@ namespace MergeDatRom
             }
         }
 
-        private void OpenFileAfterCreatedChB_CheckedChanged(object sender, EventArgs e)
-        {
-            Properties.Settings.Default.OPenFileAfterCreated = OpenFileAfterCreatedChB.Checked;
-        }
-
         private void PriorityDownBT_Click(object sender, EventArgs e)
         {
             MoveSelectedDat(1);
@@ -477,6 +480,20 @@ namespace MergeDatRom
         {
             WarningLB.Visible = true;
             WarningLB.Image = Properties.Resources.exclamation__frame;
+            WarningLB.Text = message + _warningMessageRightPadding;
+        }
+
+        private void SetCritical(string message)
+        {
+            WarningLB.Visible = true;
+            WarningLB.Image = Properties.Resources.exclamation_red;
+            WarningLB.Text = message + _warningMessageRightPadding;
+        }
+
+        private void SetSuccess(string message)
+        {
+            WarningLB.Visible = true;
+            WarningLB.Image = Properties.Resources.tick;
             WarningLB.Text = message + _warningMessageRightPadding;
         }
 
@@ -504,7 +521,153 @@ namespace MergeDatRom
 
         private void StripTagsChB_CheckedChanged(object sender, EventArgs e)
         {
-            Properties.Settings.Default.StripTagsForMatch = StripTagsChB.Checked;
+        }
+
+        private void LoadSetupBT_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog ofd = new OpenFileDialog()
+            {
+                Title = "Please choose a previously merged DAT file to load its setup",
+                Filter = "DAT files|*.dat",
+                Multiselect = false,
+                InitialDirectory = Properties.Settings.Default.LastChosenSaveDir
+            };
+
+            if (ofd.ShowDialog() != DialogResult.OK) return;
+
+            _loggingService.Log($"User chose Load Setup form file: {ofd.FileName}");
+            bool success = LoadSetupFromFile(ofd.FileName);
+
+            if (success) { SetSuccess("Successfully loaded setup."); }
+        }
+
+        private bool LoadSetupFromFile(string filePath)
+        {
+            XElement headerNode = null;
+
+            // Use XmlReader to efficiently find and read the entire <header> element
+            using (var reader = XmlReader.Create(filePath))
+            {
+                while (reader.Read())
+                {
+                    if (reader.IsStartElement() && reader.Name == "header")
+                    {
+                        headerNode = XNode.ReadFrom(reader) as XElement;
+                        break;
+                    }
+                    // Optimization: stop if we're past the header section
+                    if (reader.IsStartElement() && reader.Name == "game")
+                    {
+                        break;
+                    }
+                }
+            }
+
+            if (headerNode == null)
+            {
+                SetCritical($"No header. Not MergeDatRom dat file.");
+                return false;
+            }
+
+            if (headerNode.Element("tool") == null || headerNode.Element("tool")?.Value != "MergeDatRom")
+            {
+                SetCritical($"Incorrect tool element. Not MergeDatRom dat file.");
+                return false;
+            }
+
+            var setupNode = headerNode.Element("setup");
+            if (setupNode == null)
+            {
+                SetCritical($"No setup details. Not MergeDatRom dat file.");
+                return false;
+            }
+
+            // --- Restore Header Details ---
+            MergeDatNameTB.Text = headerNode.Element("name")?.Value;
+            MergeDatDescTB.Text = headerNode.Element("description")?.Value;
+            MergeDatAuthorTB.Text = headerNode.Element("author")?.Value;
+            MergeDatCategoryTB.Text = headerNode.Element("category")?.Value;
+
+            // --- Restore Global Settings ---
+            var globalSettings = setupNode.Element("GlobalSettings");
+            if (globalSettings != null)
+            {
+                if (Enum.TryParse<MergeType>(globalSettings.Element("Method")?.Value, out var method))
+                    MethodCB.SelectedItem = method;
+
+                if (Enum.TryParse<TagPosition>(globalSettings.Element("TagPosition")?.Value, out var tagPos))
+                    TagPositionCB.SelectedItem = tagPos;
+
+                AlsoTagDescChB.Checked = bool.Parse(globalSettings.Element("AlsoTagDesc")?.Value ?? "false");
+                OpenFileAfterCreatedChB.Checked = bool.Parse(globalSettings.Element("OpenFileAfterCreated")?.Value ?? "false");
+                StripTagsChB.Checked = bool.Parse(globalSettings.Element("StripTagsForMatching")?.Value ?? "false");
+                UseTagSquareChB.Checked = bool.Parse(globalSettings.Element("UseSquareBrackets")?.Value ?? "false");
+                UseTagBracketChB.Checked = bool.Parse(globalSettings.Element("UseBrackets")?.Value ?? "false");
+            }
+
+            // --- Restore Source DATs ---
+            var sourceDats = setupNode.Element("SourceDats");
+            if (sourceDats != null)
+            {
+                var sourceDatList = sourceDats.Elements("Dat").ToList();
+                var filePathsToLoad = new List<string>();
+                var missingFiles = new List<string>();
+
+                foreach (var datNode in sourceDatList)
+                {
+                    var path = datNode.Element("FilePath")?.Value;
+                    if (File.Exists(path))
+                    {
+                        filePathsToLoad.Add(path);
+                    }
+                    else
+                    {
+                        missingFiles.Add(path);
+                    }
+                }
+
+                // Load the available DATs
+                LoadDatFiles(filePathsToLoad);
+
+                // Now apply the saved settings to the loaded DATs
+                foreach (var datNode in sourceDatList)
+                {
+                    var path = datNode.Element("FilePath")?.Value;
+                    var loadedDat = _datMetadatas.FirstOrDefault(d => d.DatFilePath.Equals(path, StringComparison.OrdinalIgnoreCase));
+
+                    if (loadedDat != null)
+                    {
+                        loadedDat.Tag = datNode.Element("Tag")?.Value ?? string.Empty;
+                        loadedDat.ExcludeTags = datNode.Element("ExcludeTags")?.Value ?? string.Empty;
+                        loadedDat.IncludeTags = datNode.Element("IncludeTags")?.Value ?? string.Empty;
+                    }
+                }
+
+                // Refresh the property grid to show the newly applied settings
+                if (MainLB.SelectedItem != null)
+                {
+                    MainPG.SelectedObject = MainLB.SelectedItem;
+                    MainPG.Refresh();
+                }
+
+                // Report any missing files
+                if (missingFiles.Any())
+                {
+                    foreach (var missingFile in missingFiles)
+                    {
+                        _loggingService.Log($"DAT file from setup not found: {missingFile}");
+                        SetWarning($"DAT/s no longer available. See log file for details.");
+                    }
+                    return false; // Indicate that not all files were loaded successfully
+                }
+            }
+            return true;
+        }
+
+        private void SetDefaultsBT_Click(object sender, EventArgs e)
+        {
+            SetDefaults();
+            SetSuccess("Defaults Saved");
         }
     }
 }

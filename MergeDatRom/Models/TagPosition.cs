@@ -5,7 +5,7 @@ using System.Text;
 
 namespace MergeDatRom.Models
 {
-    internal enum TagPosition
+    public enum TagPosition
     {
         Suffix,
         Prefix
