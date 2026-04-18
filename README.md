@@ -5,8 +5,7 @@ A small app to merge rom dats (eg. No-Intro, Redump and TOSEC) into a single .da
 Essentially, this either merges duplicate Game elements with Tags added to the game.name and/or game.description OR picks a priority entry to place into the final merged Dat. 
 
 ## Screenshot
-<img width="1186" height="654" alt="Screenshot 2026-04-17 110219" src="https://github.com/user-attachments/assets/3c956d9f-e313-4d73-a513-474b9d866f65" />
-
+<img width="1075" height="888" alt="Screenshot 2026-04-18 132525" src="https://github.com/user-attachments/assets/09f8187f-b0fb-4d28-8c3a-40511a9bc144" />
 
 ## Example Merged .DAT
 ```xml
@@ -51,3 +50,120 @@ Essentially, this either merges duplicate Game elements with Tags added to the g
   </game>
 </datafile>
 ```
+# Guide
+
+## Overview
+
+Helps with merging rom set dats where they are in different formats. E.g No-Intro Atari Lynx are plsit into different sets (Lnx, Lyx and Bll amongst others) and sometimes in order to get a full set of games for eg, you have to pick out of each. This helps automate this process to produce a 1g1r (1 game, 1 rom) set if required or a merged dat with references to each file type. It can be used before retool if required. It also can be used with TOSEC, which re-tool can't to produce 1g1r sets.
+
+## Operational
+
+<img width="889" height="783" alt="Guide" src="https://github.com/user-attachments/assets/f505933e-0c62-4bf4-8959-36f9af8c9c05" />
+
+### 1\. Import Dats
+
+Click "Load Dats" to import dats or this is done automatically if using the "Load Setup" button. These can be ordered to influence the merge behaviour. If MDR finds roms for the same game in different dats (eg. in CAR and ATR in the pictured example) then it will choose the topmost first (if you choose KeepPriorityOnly as the merge method). 
+
+### 2\. Dat information and individual settings
+
+Gives information from the Dat headers. Also contains the following settings:
+
+**Exclude Tags:** see section 4 below for full explanation. Any tags here will be added to the global tags used to exclude games/roms.
+
+**Include Tags:** see section 4 below for full explanation. Any tags here will be added to the global tags used to include games/roms.
+
+**Tag**: If TagAll or TagAllButPriority selected in Method (see 4) then this is the tag that will be added in the output dat. 
+
+### 3\. Merged Dat Header Settings
+
+This populates the header of the merged dat with the information set here. Note: you can set a 'default' via "Set Defaults" button which is how this will read at startup. Useful if you want to use a common author or Category for eg. 
+
+### 4\. Main Merge Settings
+
+**Method:**
+
+**Keep priority only:**
+
+If the setup produces a number of roms for the same game from the different Dats, this will keep the priority one determined by the Dat order in the left hand list and also form any tagging filters. 
+
+**Tag All:**
+
+If more than one rom for each game, will keep one from each set (eg. one form CAR and one form ATR) and prefix or suffix a tag. Eg. two entries in the merged dat:
+
+> Witness, The (1983)(Infocom)(US)(CAR)
+> 
+> Witness, The (1983)(Infocom)(US)(ATR)
+
+**Tag All but Priority:**
+
+As per above, but doesn't tag the priority game/rom.
+
+**Exclude Tags:**
+
+A comma separated list of tags that is found in the game name, will be excluded form the merge results. Use for things like \[v\] in tosec (v = virus). Setting these here will apply to all dats loaded in the left hand list. If you want more specific tag exclusions for a specific set format, you can add these individually in 2. 
+
+**Include Tags:** Like exclude tags, but indicates game/rom should be included in final merged dat. In priority order if using KeepPriorityOnly. Can also set for each individual Dat as per Exclude Tags. 
+
+**Strip Tags for Game Grouping:** 
+
+Games are grouped (i.e. considered as one entity) by the game name alone rather than by name and tags. Eg:
+
+"747 Landing Simulator (1981)(APX)(US)\[a2\]\[BASIC\]"
+
+becomes 
+
+"747 Landing Simulator"
+
+Note: MDR automatically accommodates date/year tags, so you don't have to worry about controlling for those tags. For eg, it will identify these two as different games despite being the same root game name:
+
+"007 - The Living Daylights (1987)(Domark)(GB)\[k-file\] (ATR)"
+
+"007 - The Living Daylights (1994)(ANG Software)(NL)(en)"
+
+**Tags to filter**
+
+Whether to do the above on bracketed tags - "( )" eg "(NL)" or on square brackets - "\[ \]" eg "\[BASIC\]"
+
+**Preserve Multi-Disc Formats**
+
+Tick this to include all disks/sides/parts as separate game files (needed for emulators). Eg if false, only this gets merged:
+
+"Lucifer's Realm (1985)(All American Adventure)(GB)(Disk 1 of 2 Side A)\[OS-B\]"
+
+However, if true, you get all 4:
+
+"Lucifer's Realm (1985)(All American Adventure)(GB)(Disk 1 of 2 Side A)\[OS-B\]"
+
+"Lucifer's Realm (1985)(All American Adventure)(GB)(Disk 1 of 2 Side B)\[OS-B\]"
+
+(etc)
+
+### 5\. Output
+
+**Tag Position:**
+
+Where to put the Tag in the merged dat game name, as per Method.TagAll in 4.
+
+**Also Tag Description:** 
+
+Also put the tag in the game's description.
+
+Open File after cretaed:
+
+Once file has been saved - opens a copy for you to view. Use with Notepad++ to get a live copy
+
+### 6\. Actions
+
+**Set Defaults**
+
+Captures the header info and also merge settings as a default that loads on app startup. 
+
+**Load Setup:**
+
+You can open a MDR merged dat that you've already made and this will restore all the settings and the documents (if they are in the same file locations they were when you merged them last). The log will tell you specifically what's missing if they aren't. This is useful for iterating on settings until your merged dat is just right. 
+
+**Merge Dats:**
+
+Do the merge. You will choose a directory and filename of what to save the merged dat as. 
+
+&nbsp;
