@@ -29,32 +29,68 @@ namespace MergeDatRom
             // Key: Game Name, Value: List of XML nodes from different DATs
             var nameGroups = new Dictionary<string, List<XElement>>(StringComparer.OrdinalIgnoreCase);
             bool stripTags = StripTagsChB.Checked;
+            bool useSquareBrackets = UseTagSquareChB.Checked;
+            bool useBrackets = UseTagBracketChB.Checked;
 
-            // Pass 1: Load and Group
+            // Pass 1: Load, filter, and group games from each DAT file individually
             foreach (var meta in datList)
             {
                 var doc = XDocument.Load(meta.DatFilePath);
+
+                // Group games within the current DAT
+                var gamesInCurrentDat = new Dictionary<string, List<XElement>>(StringComparer.OrdinalIgnoreCase);
+                var excludeTagPatterns = ParseExcludeTags(meta.ExcludeTags);
+
                 foreach (var gameNode in doc.Descendants("game"))
                 {
-                    // Attach the metadata object so we know the Tag/Priority of this specific node
-                    gameNode.AddAnnotation(meta);
-
                     string originalGameName = gameNode.Attribute("name")?.Value ?? "Unknown";
-                    string gameName = originalGameName;
 
-                    if (stripTags)
+                    // Exclusion Check
+                    var gameTags = ExtractTags(originalGameName, useSquareBrackets, useBrackets);
+                    bool isExcluded = excludeTagPatterns.Any(pattern =>
+                        gameTags.Any(gameTag => pattern.IsMatch(gameTag))
+                    );
+                    if (isExcluded)
                     {
-                        gameName = GetGameBaseName(originalGameName);
+                        continue; // Skip this game
                     }
 
-                    if (!nameGroups.ContainsKey(gameName))
-                        nameGroups[gameName] = new List<XElement>();
+                    // Grouping
+                    string gameName = stripTags ? GetGameBaseName(originalGameName) : originalGameName;
+                    if (!gamesInCurrentDat.ContainsKey(gameName))
+                    {
+                        gamesInCurrentDat[gameName] = new List<XElement>();
+                    }
+                    gamesInCurrentDat[gameName].Add(gameNode);
+                }
 
-                    nameGroups[gameName].Add(gameNode);
+                // In-DAT Resolution (using IncludeTags)
+                var includeTags = (meta.IncludeTags ?? "").Split(',', StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries).ToList();
+                foreach (var gameName in gamesInCurrentDat.Keys)
+                {
+                    var candidates = gamesInCurrentDat[gameName];
+                    XElement winner;
+
+                    if (candidates.Count > 1)
+                    {
+                        winner = FindBestCandidate(candidates, includeTags, useSquareBrackets, useBrackets);
+                    }
+                    else
+                    {
+                        winner = candidates.First();
+                    }
+
+                    // Add the winner from this DAT to the main collection
+                    winner.AddAnnotation(meta);
+                    if (!nameGroups.ContainsKey(gameName))
+                    {
+                        nameGroups[gameName] = new List<XElement>();
+                    }
+                    nameGroups[gameName].Add(winner);
                 }
             }
 
-            // Pass 2: Resolve Conflicts
+            // Pass 2: Resolve Conflicts (between DATs)
             foreach (var group in nameGroups)
             {
                 var games = group.Value;
@@ -120,16 +156,109 @@ namespace MergeDatRom
                         }
                     }
                 }
-                else
-                {
-                    SetWarning($"Merge failed. Please check the logs for details");
-                }
+            }
+            else
+            {
+                SetWarning($"Merge failed. Please check the logs for details");
             }
         }
 
         private void AlsoTagDescChB_CheckedChanged(object sender, EventArgs e)
         {
             Properties.Settings.Default.DefaultAlsoTagDesc = AlsoTagDescChB.Checked;
+        }
+
+        private List<Regex> ParseExcludeTags(string tagsCsv)
+        {
+            var patterns = new List<Regex>();
+            if (string.IsNullOrEmpty(tagsCsv)) return patterns;
+
+            var tags = tagsCsv.Split(',', StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries);
+            foreach (var tag in tags)
+            {
+                string pattern = Regex.Escape(tag);
+                if (pattern.EndsWith(@"\*"))
+                {
+                    pattern = "^" + pattern.Substring(0, pattern.Length - 2) + ".*";
+                }
+                else
+                {
+                    pattern = "^" + pattern + "$";
+                }
+                patterns.Add(new Regex(pattern, RegexOptions.IgnoreCase));
+            }
+            return patterns;
+        }
+
+        private List<string> ExtractTags(string gameName, bool useSquare, bool useBrackets)
+        {
+            var tags = new List<string>();
+            if (!useSquare && !useBrackets) return tags;
+
+            // Temporarily remove the date tag so it's not extracted as a regular tag
+            var dateRegex = new Regex(@"\s\((?:\d{4}-\d{2}-\d{2}|\d{2}[xX]{2}|\d{4})\)");
+            var nameWithoutDate = dateRegex.Replace(gameName, "", 1); // Replace only the first occurrence
+
+            var patterns = new List<string>();
+            if (useSquare) patterns.Add(@"\[(.*?)\]");
+            if (useBrackets) patterns.Add(@"\((.*?)\)");
+
+            if (!patterns.Any()) return tags;
+
+            var pattern = string.Join("|", patterns);
+
+            var matches = Regex.Matches(nameWithoutDate, pattern);
+            foreach (Match match in matches)
+            {
+                // Find the first successful capture group
+                var capturedTag = match.Groups.Cast<Group>().Skip(1).FirstOrDefault(g => g.Success)?.Value;
+                if (capturedTag != null)
+                {
+                    tags.Add(capturedTag);
+                }
+            }
+            return tags;
+        }
+
+        private XElement FindBestCandidate(List<XElement> candidates, List<string> includeTags, bool useSquare, bool useBrackets)
+        {
+            // Pre-calculate tags for each candidate to avoid repeated extraction
+            var candidatesWithTags = candidates.Select(c => new
+            {
+                Node = c,
+                Tags = ExtractTags(c.Attribute("name")?.Value ?? "", useSquare, useBrackets)
+            }).ToList();
+
+            foreach (var includeTag in includeTags)
+            {
+                XElement winner = null;
+
+                if (includeTag.Equals("notag", StringComparison.OrdinalIgnoreCase))
+                {
+                    winner = candidatesWithTags
+                        .FirstOrDefault(c => !c.Tags.Any())?.Node;
+                }
+                else if (includeTag.Equals("anytag", StringComparison.OrdinalIgnoreCase))
+                {
+                    winner = candidatesWithTags
+                        .Where(c => c.Tags.Any())
+                        .OrderByDescending(c => c.Tags.Count)
+                        .FirstOrDefault()?.Node;
+                }
+                else // Handle regular tags
+                {
+                    winner = candidatesWithTags
+                        .FirstOrDefault(c => c.Tags.Contains(includeTag, StringComparer.OrdinalIgnoreCase))?.Node;
+                }
+
+                if (winner != null)
+                {
+                    return winner; // Found a winner based on the current includeTag, so we're done.
+                }
+            }
+
+            // Fallback: If no includeTag matched, return the first candidate from the original list
+            return candidates.First();
         }
 
         private void ApplyTag(XElement game)
