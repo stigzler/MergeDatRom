@@ -32,6 +32,8 @@ namespace MergeDatRom
             bool stripTags = StripTagsChB.Checked;
             bool useSquareBrackets = UseTagSquareChB.Checked;
             bool useBrackets = UseTagBracketChB.Checked;
+            string globalExcludeTags = ExcludeTagsTB.Text;
+            string globalIncludeTags = IncludeTagsTB.Text;
 
             // Pass 1: Load, filter, and group games from each DAT file individually
             foreach (var meta in datList)
@@ -40,7 +42,22 @@ namespace MergeDatRom
 
                 // Group games within the current DAT
                 var gamesInCurrentDat = new Dictionary<string, List<XElement>>(StringComparer.OrdinalIgnoreCase);
-                var excludeTagPatterns = ParseExcludeTags(meta.ExcludeTags);
+
+                // Combine global and local exclude tags
+                string combinedExcludeTags = meta.ExcludeTags;
+                if (!string.IsNullOrEmpty(globalExcludeTags))
+                {
+                    if (!string.IsNullOrEmpty(combinedExcludeTags))
+                    {
+                        combinedExcludeTags = $"{globalExcludeTags},{combinedExcludeTags}";
+                    }
+                    else
+                    {
+                        combinedExcludeTags = globalExcludeTags;
+                    }
+                }
+                var excludeTagPatterns = ParseExcludeTags(combinedExcludeTags);
+
 
                 foreach (var gameNode in doc.Descendants("game"))
                 {
@@ -66,7 +83,21 @@ namespace MergeDatRom
                 }
 
                 // In-DAT Resolution (using IncludeTags)
-                var includeTags = (meta.IncludeTags ?? "").Split(',', StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries).ToList();
+                // Combine global and local include tags
+                string combinedIncludeTags = meta.IncludeTags;
+                if (!string.IsNullOrEmpty(globalIncludeTags))
+                {
+                    if (!string.IsNullOrEmpty(combinedIncludeTags))
+                    {
+                        combinedIncludeTags = $"{globalIncludeTags},{combinedIncludeTags}";
+                    }
+                    else
+                    {
+                        combinedIncludeTags = globalIncludeTags;
+                    }
+                }
+                var includeTags = (combinedIncludeTags ?? "").Split(',', StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries).ToList();
+
                 foreach (var gameName in gamesInCurrentDat.Keys)
                 {
                     var candidates = gamesInCurrentDat[gameName];
@@ -144,7 +175,9 @@ namespace MergeDatRom
                 OpenFileAfterCreated = OpenFileAfterCreatedChB.Checked,
                 StripTagsForMatching = StripTagsChB.Checked,
                 UseSquareBrackets = UseTagSquareChB.Checked,
-                UseBrackets = UseTagBracketChB.Checked
+                UseBrackets = UseTagBracketChB.Checked,
+                GlobalIncludeTags = IncludeTagsTB.Text,
+                GlobalExcludeTags = ExcludeTagsTB.Text
             };
 
             bool success = _datMetadataService.CreateMergedDatFile(sortedNameGroups, sfd.FileName, MergeDatNameTB.Text,
@@ -603,6 +636,8 @@ namespace MergeDatRom
                 StripTagsChB.Checked = bool.Parse(globalSettings.Element("StripTagsForMatching")?.Value ?? "false");
                 UseTagSquareChB.Checked = bool.Parse(globalSettings.Element("UseSquareBrackets")?.Value ?? "false");
                 UseTagBracketChB.Checked = bool.Parse(globalSettings.Element("UseBrackets")?.Value ?? "false");
+                IncludeTagsTB.Text = globalSettings.Element("GlobalIncludeTags")?.Value ?? string.Empty;
+                ExcludeTagsTB.Text = globalSettings.Element("GlobalExcludeTags")?.Value ?? string.Empty;
             }
 
             // --- Restore Source DATs ---

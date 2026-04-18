@@ -40,7 +40,9 @@ namespace MergeDatRom.Services
                         new XElement("OpenFileAfterCreated", mergeSettings.OpenFileAfterCreated),
                         new XElement("StripTagsForMatching", mergeSettings.StripTagsForMatching),
                         new XElement("UseSquareBrackets", mergeSettings.UseSquareBrackets),
-                        new XElement("UseBrackets", mergeSettings.UseBrackets)
+                        new XElement("UseBrackets", mergeSettings.UseBrackets),
+                        new XElement("GlobalIncludeTags", mergeSettings.GlobalIncludeTags),
+                        new XElement("GlobalExcludeTags", mergeSettings.GlobalExcludeTags)
                     ),
                     new XElement("SourceDats",
                         datMetadatas.Select(d => new XElement("Dat",

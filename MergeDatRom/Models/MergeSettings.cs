@@ -11,5 +11,7 @@ namespace MergeDatRom.Models
         public bool StripTagsForMatching { get; set; }
         public bool UseSquareBrackets { get; set; }
         public bool UseBrackets { get; set; }
+        public string GlobalIncludeTags { get; set; }
+        public string GlobalExcludeTags { get; set; }
     }
 }

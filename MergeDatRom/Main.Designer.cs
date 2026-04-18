@@ -496,7 +496,7 @@
             label10.Font = new Font("Segoe UI", 12F);
             label10.FontStyle = FontStyle.Regular;
             label10.ForeColor = Color.FromArgb(220, 220, 220);
-            label10.Location = new Point(13, 87);
+            label10.Location = new Point(11, 57);
             label10.Name = "label10";
             label10.ScaleFont = 100;
             label10.Size = new Size(113, 23);
@@ -514,7 +514,7 @@
             label9.Font = new Font("Segoe UI", 12F);
             label9.FontStyle = FontStyle.Regular;
             label9.ForeColor = Color.FromArgb(220, 220, 220);
-            label9.Location = new Point(26, 56);
+            label9.Location = new Point(23, 86);
             label9.Name = "label9";
             label9.ScaleFont = 100;
             label9.Size = new Size(100, 23);
@@ -536,7 +536,7 @@
             ExcludeTagsTB.Font = new Font("Segoe UI", 9.75F);
             ExcludeTagsTB.FontStyle = FontStyle.Regular;
             ExcludeTagsTB.ForeColor = Color.FromArgb(220, 220, 220);
-            ExcludeTagsTB.Location = new Point(130, 86);
+            ExcludeTagsTB.Location = new Point(130, 55);
             ExcludeTagsTB.Name = "ExcludeTagsTB";
             ExcludeTagsTB.ScaleFont = 100;
             ExcludeTagsTB.Size = new Size(294, 25);
@@ -551,7 +551,7 @@
             IncludeTagsTB.Font = new Font("Segoe UI", 9.75F);
             IncludeTagsTB.FontStyle = FontStyle.Regular;
             IncludeTagsTB.ForeColor = Color.FromArgb(220, 220, 220);
-            IncludeTagsTB.Location = new Point(130, 55);
+            IncludeTagsTB.Location = new Point(130, 86);
             IncludeTagsTB.Name = "IncludeTagsTB";
             IncludeTagsTB.ScaleFont = 100;
             IncludeTagsTB.Size = new Size(294, 25);
