@@ -46,8 +46,11 @@
             MainPG = new stigzler.Winforms.Base.UIElements.PropertyGrid();
             label1 = new Label();
             groupBox2 = new stigzler.Winforms.Base.UIElements.GroupBox();
-            StripTagsChB = new stigzler.Winforms.Base.UIElements.CheckBox();
+            label8 = new stigzler.Winforms.Base.UIElements.Label();
             MainTT = new stigzler.Winforms.Base.UIElements.ToolTip(components);
+            UseTagBracketChB = new stigzler.Winforms.Base.UIElements.CheckBox();
+            UseTagSquareChB = new stigzler.Winforms.Base.UIElements.CheckBox();
+            StripTagsChB = new stigzler.Winforms.Base.UIElements.CheckBox();
             AlsoTagDescChB = new stigzler.Winforms.Base.UIElements.CheckBox();
             OpenFileAfterCreatedChB = new stigzler.Winforms.Base.UIElements.CheckBox();
             label7 = new stigzler.Winforms.Base.UIElements.Label();
@@ -66,9 +69,6 @@
             MergeDatNameTB = new stigzler.Winforms.Base.UIElements.TextBox();
             flowLayoutPanel2 = new stigzler.Winforms.Base.UIElements.FlowLayoutPanel();
             MergeBT = new stigzler.Winforms.Base.UIElements.Button();
-            UseTagSquareChB = new stigzler.Winforms.Base.UIElements.CheckBox();
-            UseTagBracketChB = new stigzler.Winforms.Base.UIElements.CheckBox();
-            label8 = new stigzler.Winforms.Base.UIElements.Label();
             MainMS.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)MainSC).BeginInit();
             MainSC.Panel1.SuspendLayout();
@@ -365,21 +365,23 @@
             groupBox2.Text = "Merge Settings";
             groupBox2.TitleColor = Color.FromArgb(220, 220, 220);
             // 
-            // StripTagsChB
+            // label8
             // 
-            StripTagsChB.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
-            StripTagsChB.Location = new Point(117, 141);
-            StripTagsChB.Name = "StripTagsChB";
-            StripTagsChB.OverrideTheme = false;
-            StripTagsChB.Size = new Size(307, 24);
-            StripTagsChB.TabIndex = 9;
-            StripTagsChB.Text = "Strip Tags for matching";
-            StripTagsChB.ToolTip = MainTT;
-            StripTagsChB.ToolTipHorizontalAlignment = HorizontalAlignment.Right;
-            StripTagsChB.ToolTipImage = null;
-            StripTagsChB.ToolTipText = "Use to consdier just game names without the tags (useful with TOSEC). Accomodates different dates.";
-            StripTagsChB.ToolTipTitle = null;
-            StripTagsChB.UseVisualStyleBackColor = true;
+            label8.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            label8.FontStyle = FontStyle.Regular;
+            label8.ForeColor = Color.FromArgb(220, 220, 220);
+            label8.Location = new Point(12, 170);
+            label8.Name = "label8";
+            label8.ScaleFont = 100;
+            label8.Size = new Size(94, 23);
+            label8.TabIndex = 12;
+            label8.Text = "Tags to use:";
+            label8.TextAlign = ContentAlignment.MiddleRight;
+            label8.ToolTip = MainTT;
+            label8.ToolTipHorizontalAlignment = HorizontalAlignment.Right;
+            label8.ToolTipImage = null;
+            label8.ToolTipText = null;
+            label8.ToolTipTitle = null;
             // 
             // MainTT
             // 
@@ -406,6 +408,52 @@
             MainTT.ToolTipText = "Information here..";
             MainTT.ToolTipTitle = "Info";
             MainTT.Width = 128;
+            // 
+            // UseTagBracketChB
+            // 
+            UseTagBracketChB.Location = new Point(185, 171);
+            UseTagBracketChB.Name = "UseTagBracketChB";
+            UseTagBracketChB.OverrideTheme = false;
+            UseTagBracketChB.Size = new Size(62, 24);
+            UseTagBracketChB.TabIndex = 11;
+            UseTagBracketChB.Text = "\"( )\"";
+            UseTagBracketChB.ToolTip = MainTT;
+            UseTagBracketChB.ToolTipHorizontalAlignment = HorizontalAlignment.Right;
+            UseTagBracketChB.ToolTipImage = null;
+            UseTagBracketChB.ToolTipText = null;
+            UseTagBracketChB.ToolTipTitle = null;
+            UseTagBracketChB.UseVisualStyleBackColor = true;
+            // 
+            // UseTagSquareChB
+            // 
+            UseTagSquareChB.Location = new Point(117, 171);
+            UseTagSquareChB.Name = "UseTagSquareChB";
+            UseTagSquareChB.OverrideTheme = false;
+            UseTagSquareChB.Size = new Size(62, 24);
+            UseTagSquareChB.TabIndex = 10;
+            UseTagSquareChB.Text = "\"[ ]\"";
+            UseTagSquareChB.ToolTip = MainTT;
+            UseTagSquareChB.ToolTipHorizontalAlignment = HorizontalAlignment.Right;
+            UseTagSquareChB.ToolTipImage = null;
+            UseTagSquareChB.ToolTipText = null;
+            UseTagSquareChB.ToolTipTitle = null;
+            UseTagSquareChB.UseVisualStyleBackColor = true;
+            // 
+            // StripTagsChB
+            // 
+            StripTagsChB.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
+            StripTagsChB.Location = new Point(117, 141);
+            StripTagsChB.Name = "StripTagsChB";
+            StripTagsChB.OverrideTheme = false;
+            StripTagsChB.Size = new Size(307, 24);
+            StripTagsChB.TabIndex = 9;
+            StripTagsChB.Text = "Strip Tags for matching";
+            StripTagsChB.ToolTip = MainTT;
+            StripTagsChB.ToolTipHorizontalAlignment = HorizontalAlignment.Right;
+            StripTagsChB.ToolTipImage = null;
+            StripTagsChB.ToolTipText = "Use to consdier just game names without the tags (useful with TOSEC). Accomodates different dates.";
+            StripTagsChB.ToolTipTitle = null;
+            StripTagsChB.UseVisualStyleBackColor = true;
             // 
             // AlsoTagDescChB
             // 
@@ -741,53 +789,6 @@
             MergeBT.ToolTipTitle = null;
             MergeBT.UseVisualStyleBackColor = false;
             MergeBT.Click += MergeBT_Click;
-            // 
-            // UseTagSquareChB
-            // 
-            UseTagSquareChB.Location = new Point(117, 171);
-            UseTagSquareChB.Name = "UseTagSquareChB";
-            UseTagSquareChB.OverrideTheme = false;
-            UseTagSquareChB.Size = new Size(62, 24);
-            UseTagSquareChB.TabIndex = 10;
-            UseTagSquareChB.Text = "\"[ ]\"";
-            UseTagSquareChB.ToolTip = MainTT;
-            UseTagSquareChB.ToolTipHorizontalAlignment = HorizontalAlignment.Right;
-            UseTagSquareChB.ToolTipImage = null;
-            UseTagSquareChB.ToolTipText = null;
-            UseTagSquareChB.ToolTipTitle = null;
-            UseTagSquareChB.UseVisualStyleBackColor = true;
-            // 
-            // UseTagBracketChB
-            // 
-            UseTagBracketChB.Location = new Point(185, 171);
-            UseTagBracketChB.Name = "UseTagBracketChB";
-            UseTagBracketChB.OverrideTheme = false;
-            UseTagBracketChB.Size = new Size(62, 24);
-            UseTagBracketChB.TabIndex = 11;
-            UseTagBracketChB.Text = "\"( )\"";
-            UseTagBracketChB.ToolTip = MainTT;
-            UseTagBracketChB.ToolTipHorizontalAlignment = HorizontalAlignment.Right;
-            UseTagBracketChB.ToolTipImage = null;
-            UseTagBracketChB.ToolTipText = null;
-            UseTagBracketChB.ToolTipTitle = null;
-            UseTagBracketChB.UseVisualStyleBackColor = true;
-            // 
-            // label8
-            // 
-            label8.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            label8.FontStyle = FontStyle.Regular;
-            label8.Location = new Point(12, 170);
-            label8.Name = "label8";
-            label8.ScaleFont = 100;
-            label8.Size = new Size(94, 23);
-            label8.TabIndex = 12;
-            label8.Text = "Tags to use:";
-            label8.TextAlign = ContentAlignment.MiddleRight;
-            label8.ToolTip = MainTT;
-            label8.ToolTipHorizontalAlignment = HorizontalAlignment.Right;
-            label8.ToolTipImage = null;
-            label8.ToolTipText = null;
-            label8.ToolTipTitle = null;
             // 
             // Main
             // 
