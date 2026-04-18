@@ -5,7 +5,7 @@ using System.Text;
 
 namespace MergeDatRom.Models
 {
-    internal enum MergeType
+    public enum MergeType
     {
         [Description("Tag all")]
         TagAll,

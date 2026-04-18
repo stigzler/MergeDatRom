@@ -16,7 +16,8 @@ namespace MergeDatRom.Services
         }
 
         internal bool CreateMergedDatFile(IDictionary<string, List<XElement>> nameGroups,
-            string filename, string name, string description, string author, string category)
+            string filename, string name, string description, string author, string category,
+            IEnumerable<DatMetadata> datMetadatas, MergeSettings mergeSettings)
         {
             try
             {
@@ -30,12 +31,34 @@ namespace MergeDatRom.Services
 
                 XNamespace xsi = "http://www.w3.org/2001/XMLSchema-instance";
 
+                // Create the new <setup> element
+                var setupElement = new XElement("setup",
+                    new XElement("GlobalSettings",
+                        new XElement("Method", mergeSettings.Method),
+                        new XElement("TagPosition", mergeSettings.TagPosition),
+                        new XElement("AlsoTagDesc", mergeSettings.AlsoTagDesc),
+                        new XElement("OpenFileAfterCreated", mergeSettings.OpenFileAfterCreated),
+                        new XElement("StripTagsForMatching", mergeSettings.StripTagsForMatching),
+                        new XElement("UseSquareBrackets", mergeSettings.UseSquareBrackets),
+                        new XElement("UseBrackets", mergeSettings.UseBrackets)
+                    ),
+                    new XElement("SourceDats",
+                        datMetadatas.Select(d => new XElement("Dat",
+                            new XElement("FilePath", d.DatFilePath),
+                            new XElement("Tag", d.Tag),
+                            new XElement("ExcludeTags", d.ExcludeTags),
+                            new XElement("IncludeTags", d.IncludeTags)
+                        ))
+                    )
+                );
+
                 var header = new XElement("header",
                     new XElement("name", name ?? string.Empty),
                     new XElement("description", description ?? string.Empty),
-                    new XElement("date", DateTime.Now.ToString("yyyyMMdd-HHmmss")),
+                    new XElement("date", DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss")),
                     new XElement("author", author ?? string.Empty),
-                    new XElement("category", category ?? string.Empty)
+                    new XElement("category", category ?? string.Empty),
+                    setupElement // Add the setup block to the header
                 );
 
                 var root = new XElement("datafile",
@@ -48,7 +71,9 @@ namespace MergeDatRom.Services
                 {
                     foreach (var game in gameGroup)
                     {
-                        root.Add(new XElement(game));
+                        // Remove the annotation before saving
+                        game.RemoveAnnotations<DatMetadata>();
+                        root.Add(game);
                     }
                 }
 
@@ -61,8 +86,10 @@ namespace MergeDatRom.Services
                     Encoding = new UTF8Encoding(false)
                 };
 
-                using var writer = XmlWriter.Create(filename, settings);
-                doc.Save(writer);
+                using (var writer = XmlWriter.Create(filename, settings))
+                {
+                    doc.Save(writer);
+                }
 
                 _loggingService.Log($"Merged DAT file created successfully with {root.Elements("game").Count()} game entries: {filename}");
                 return true;

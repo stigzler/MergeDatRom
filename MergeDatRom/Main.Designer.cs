@@ -815,6 +815,7 @@
             LoadSetupBT.ToolTipText = null;
             LoadSetupBT.ToolTipTitle = null;
             LoadSetupBT.UseVisualStyleBackColor = false;
+            LoadSetupBT.Click += LoadSetupBT_Click;
             // 
             // Main
             // 
