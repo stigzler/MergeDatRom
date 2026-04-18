@@ -15,7 +15,7 @@ namespace MergeDatRom.Services
             _loggingService = loggingService;
         }
 
-        internal bool CreateMergedDatFile(Dictionary<string, List<XElement>> nameGroups,
+        internal bool CreateMergedDatFile(IDictionary<string, List<XElement>> nameGroups,
             string filename, string name, string description, string author, string category)
         {
             try

@@ -66,6 +66,9 @@
             MergeDatNameTB = new stigzler.Winforms.Base.UIElements.TextBox();
             flowLayoutPanel2 = new stigzler.Winforms.Base.UIElements.FlowLayoutPanel();
             MergeBT = new stigzler.Winforms.Base.UIElements.Button();
+            UseTagSquareChB = new stigzler.Winforms.Base.UIElements.CheckBox();
+            UseTagBracketChB = new stigzler.Winforms.Base.UIElements.CheckBox();
+            label8 = new stigzler.Winforms.Base.UIElements.Label();
             MainMS.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)MainSC).BeginInit();
             MainSC.Panel1.SuspendLayout();
@@ -313,7 +316,6 @@
             MainPG.Dock = DockStyle.Fill;
             MainPG.HelpBackColor = Color.FromArgb(30, 30, 30);
             MainPG.HelpForeColor = Color.FromArgb(192, 192, 192);
-            MainPG.HelpVisible = false;
             MainPG.LineColor = Color.FromArgb(50, 50, 50);
             MainPG.Location = new Point(3, 3);
             MainPG.Margin = new Padding(5);
@@ -341,6 +343,9 @@
             groupBox2.BorderColor = Color.FromArgb(100, 100, 100);
             groupBox2.BorderStyle = System.Drawing.Drawing2D.DashStyle.Solid;
             groupBox2.BorderThickness = 1;
+            groupBox2.Controls.Add(label8);
+            groupBox2.Controls.Add(UseTagBracketChB);
+            groupBox2.Controls.Add(UseTagSquareChB);
             groupBox2.Controls.Add(StripTagsChB);
             groupBox2.Controls.Add(AlsoTagDescChB);
             groupBox2.Controls.Add(OpenFileAfterCreatedChB);
@@ -354,7 +359,7 @@
             groupBox2.Margin = new Padding(2);
             groupBox2.Name = "groupBox2";
             groupBox2.Padding = new Padding(2);
-            groupBox2.Size = new Size(438, 175);
+            groupBox2.Size = new Size(438, 260);
             groupBox2.TabIndex = 3;
             groupBox2.TabStop = false;
             groupBox2.Text = "Merge Settings";
@@ -372,7 +377,7 @@
             StripTagsChB.ToolTip = MainTT;
             StripTagsChB.ToolTipHorizontalAlignment = HorizontalAlignment.Right;
             StripTagsChB.ToolTipImage = null;
-            StripTagsChB.ToolTipText = null;
+            StripTagsChB.ToolTipText = "Use to consdier just game names without the tags (useful with TOSEC). Accomodates different dates.";
             StripTagsChB.ToolTipTitle = null;
             StripTagsChB.UseVisualStyleBackColor = true;
             // 
@@ -410,12 +415,12 @@
             AlsoTagDescChB.OverrideTheme = false;
             AlsoTagDescChB.Size = new Size(307, 24);
             AlsoTagDescChB.TabIndex = 8;
-            AlsoTagDescChB.Tag = "If a tagging Method is selected whether to also tag the description element";
+            AlsoTagDescChB.Tag = "";
             AlsoTagDescChB.Text = "Also Tag Description";
             AlsoTagDescChB.ToolTip = MainTT;
             AlsoTagDescChB.ToolTipHorizontalAlignment = HorizontalAlignment.Right;
             AlsoTagDescChB.ToolTipImage = null;
-            AlsoTagDescChB.ToolTipText = null;
+            AlsoTagDescChB.ToolTipText = "If a tagging Method is selected whether to also tag the description element";
             AlsoTagDescChB.ToolTipTitle = null;
             AlsoTagDescChB.UseVisualStyleBackColor = true;
             AlsoTagDescChB.CheckedChanged += AlsoTagDescChB_CheckedChanged;
@@ -737,6 +742,53 @@
             MergeBT.UseVisualStyleBackColor = false;
             MergeBT.Click += MergeBT_Click;
             // 
+            // UseTagSquareChB
+            // 
+            UseTagSquareChB.Location = new Point(117, 171);
+            UseTagSquareChB.Name = "UseTagSquareChB";
+            UseTagSquareChB.OverrideTheme = false;
+            UseTagSquareChB.Size = new Size(62, 24);
+            UseTagSquareChB.TabIndex = 10;
+            UseTagSquareChB.Text = "\"[ ]\"";
+            UseTagSquareChB.ToolTip = MainTT;
+            UseTagSquareChB.ToolTipHorizontalAlignment = HorizontalAlignment.Right;
+            UseTagSquareChB.ToolTipImage = null;
+            UseTagSquareChB.ToolTipText = null;
+            UseTagSquareChB.ToolTipTitle = null;
+            UseTagSquareChB.UseVisualStyleBackColor = true;
+            // 
+            // UseTagBracketChB
+            // 
+            UseTagBracketChB.Location = new Point(185, 171);
+            UseTagBracketChB.Name = "UseTagBracketChB";
+            UseTagBracketChB.OverrideTheme = false;
+            UseTagBracketChB.Size = new Size(62, 24);
+            UseTagBracketChB.TabIndex = 11;
+            UseTagBracketChB.Text = "\"( )\"";
+            UseTagBracketChB.ToolTip = MainTT;
+            UseTagBracketChB.ToolTipHorizontalAlignment = HorizontalAlignment.Right;
+            UseTagBracketChB.ToolTipImage = null;
+            UseTagBracketChB.ToolTipText = null;
+            UseTagBracketChB.ToolTipTitle = null;
+            UseTagBracketChB.UseVisualStyleBackColor = true;
+            // 
+            // label8
+            // 
+            label8.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            label8.FontStyle = FontStyle.Regular;
+            label8.Location = new Point(12, 170);
+            label8.Name = "label8";
+            label8.ScaleFont = 100;
+            label8.Size = new Size(94, 23);
+            label8.TabIndex = 12;
+            label8.Text = "Tags to use:";
+            label8.TextAlign = ContentAlignment.MiddleRight;
+            label8.ToolTip = MainTT;
+            label8.ToolTipHorizontalAlignment = HorizontalAlignment.Right;
+            label8.ToolTipImage = null;
+            label8.ToolTipText = null;
+            label8.ToolTipTitle = null;
+            // 
             // Main
             // 
             AutoScaleDimensions = new SizeF(7F, 17F);
@@ -821,5 +873,8 @@
         private stigzler.Winforms.Base.UIElements.CheckBox OpenFileAfterCreatedChB;
         private stigzler.Winforms.Base.ToolStripElements.Label VersionLB;
         private stigzler.Winforms.Base.UIElements.CheckBox StripTagsChB;
+        private stigzler.Winforms.Base.UIElements.Label label8;
+        private stigzler.Winforms.Base.UIElements.CheckBox UseTagBracketChB;
+        private stigzler.Winforms.Base.UIElements.CheckBox UseTagSquareChB;
     }
 }

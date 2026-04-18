@@ -95,7 +95,10 @@ namespace MergeDatRom
 
             Properties.Settings.Default.LastChosenSaveDir = Path.GetDirectoryName(sfd.FileName);
 
-            bool success = _datMetadataService.CreateMergedDatFile(nameGroups, sfd.FileName, MergeDatNameTB.Text,
+            // Sort the games alphabetically by name before saving
+            var sortedNameGroups = new SortedDictionary<string, List<XElement>>(nameGroups, StringComparer.OrdinalIgnoreCase);
+
+            bool success = _datMetadataService.CreateMergedDatFile(sortedNameGroups, sfd.FileName, MergeDatNameTB.Text,
                 MergeDatDescTB.Text, MergeDatAuthorTB.Text, MergeDatCategoryTB.Text);
 
             if (success)
@@ -350,13 +353,13 @@ namespace MergeDatRom
 
         private string GetGameBaseName(string name)
         {
-            // Regex to find the first year in parentheses, e.g., " (1987)"
-            var regex = new Regex(@"\s\((\d{4})\)");
+            // Regex to find date tags like (1987), (19xx), or (2024-03-07)
+            var regex = new Regex(@"\s\((\d{4}-\d{2}-\d{2}|\d{2}[xX]{2}|\d{4})\)");
             var match = regex.Match(name);
 
             if (match.Success)
             {
-                // Return the part of the name before the year tag + the year tag itself
+                // Return the part of the name before the date tag + the date tag itself
                 return name.Substring(0, match.Index) + match.Value;
             }
 

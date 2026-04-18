@@ -18,7 +18,16 @@ namespace MergeDatRom.Models
         public string DatName { get; set; } = string.Empty;
 
         //public uint Priority { get; set; } = 0;
+        [Description("When adding a file type Tag, what to tag these files as")]
         public string Tag { get; set; } = string.Empty;
+
+        [Description("If a filename contains this tag, exclude it from the merged DAT. " +
+            "Separate multiple tags with a comma, without parenthesis or square brackets")]
+        public string ExcludeTags { get; set; } = string.Empty;
+
+        [Description("If a filename contains this tag, include it in the merged DAT. In priority order. If tag is identified, skips all other checks. Still processes dats in order." +
+            "Separate multiple tags with a comma, without parenthesis or square brackets")]
+        public string IncludeTags { get; set; } = string.Empty;
 
         public DatMetadata(string datFilePath)
         {
