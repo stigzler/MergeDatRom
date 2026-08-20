@@ -17,7 +17,7 @@ namespace MergeDatRom.Services
 
         internal bool CreateMergedDatFile(IDictionary<string, List<XElement>> nameGroups,
             string filename, string name, string description, string author, string category,
-            IEnumerable<DatMetadata> datMetadatas, MergeSettings mergeSettings)
+            IEnumerable<DatMetadata> datMetadatas, MergeSettings mergeSettings, bool addSetupElement)
         {
             try
             {
@@ -56,15 +56,32 @@ namespace MergeDatRom.Services
                 );
 
                 var version = System.Reflection.Assembly.GetExecutingAssembly().GetName().Version;
-                var header = new XElement("header",
-                    new XElement("name", name ?? string.Empty),
-                    new XElement("description", description ?? string.Empty),
-                    new XElement("date", DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss")),
-                    new XElement("author", author ?? string.Empty),
-                    new XElement("category", category ?? string.Empty),
-                    new XElement("tool", new XAttribute("version", $"{version.Major}.{version.Minor}.{version.Build}"), "MergeDatRom"),
-                    setupElement // Add the setup block to the header
-                );
+
+                XElement header;
+
+                if (addSetupElement)
+                {
+                    header = new XElement("header",
+                       new XElement("name", name ?? string.Empty),
+                       new XElement("description", description ?? string.Empty),
+                       new XElement("date", DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss")),
+                       new XElement("author", author ?? string.Empty),
+                       new XElement("category", category ?? string.Empty),
+                       new XElement("tool", new XAttribute("version", $"{version.Major}.{version.Minor}.{version.Build}"), "MergeDatRom"),
+                       setupElement // Add the setup block to the header
+                   );
+                }
+                else
+                {
+                    header = new XElement("header",
+                       new XElement("name", name ?? string.Empty),
+                       new XElement("description", description ?? string.Empty),
+                       new XElement("date", DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss")),
+                       new XElement("author", author ?? string.Empty),
+                       new XElement("category", category ?? string.Empty),
+                       new XElement("tool", new XAttribute("version", $"{version.Major}.{version.Minor}.{version.Build}"), "MergeDatRom")
+                   );
+                }
 
                 var root = new XElement("datafile",
                     new XAttribute(XNamespace.Xmlns + "xsi", xsi),

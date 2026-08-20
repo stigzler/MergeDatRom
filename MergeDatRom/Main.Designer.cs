@@ -41,13 +41,15 @@
             LoadDatsBT = new stigzler.Winforms.Base.UIElements.Button();
             PriorityUpBT = new stigzler.Winforms.Base.UIElements.Button();
             PriorityDownBT = new stigzler.Winforms.Base.UIElements.Button();
+            label11 = new stigzler.Winforms.Base.UIElements.Label();
+            MainTT = new stigzler.Winforms.Base.UIElements.ToolTip(components);
             RhsSC = new SplitContainer();
             PgPN = new stigzler.Winforms.Base.UIElements.Panel();
             MainPG = new stigzler.Winforms.Base.UIElements.PropertyGrid();
             label1 = new Label();
             groupBox2 = new stigzler.Winforms.Base.UIElements.GroupBox();
+            AddSetupElementChB = new stigzler.Winforms.Base.UIElements.CheckBox();
             AlsoTagDescChB = new stigzler.Winforms.Base.UIElements.CheckBox();
-            MainTT = new stigzler.Winforms.Base.UIElements.ToolTip(components);
             OpenFileAfterCreatedChB = new stigzler.Winforms.Base.UIElements.CheckBox();
             label7 = new stigzler.Winforms.Base.UIElements.Label();
             TagPositionCB = new stigzler.Winforms.Base.UIElements.ComboBox();
@@ -65,6 +67,7 @@
             StripTagsChB = new stigzler.Winforms.Base.UIElements.CheckBox();
             WarningLB = new Label();
             groupBox1 = new stigzler.Winforms.Base.UIElements.GroupBox();
+            AutoPopulateHeaderChB = new stigzler.Winforms.Base.UIElements.CheckBox();
             label5 = new stigzler.Winforms.Base.UIElements.Label();
             MergeDatCategoryTB = new stigzler.Winforms.Base.UIElements.TextBox();
             label4 = new stigzler.Winforms.Base.UIElements.Label();
@@ -103,7 +106,7 @@
             MainMS.Location = new Point(4, 4);
             MainMS.Name = "MainMS";
             MainMS.ShowItemToolTips = true;
-            MainMS.Size = new Size(676, 25);
+            MainMS.Size = new Size(913, 25);
             MainMS.TabIndex = 0;
             MainMS.Text = "menuStrip1";
             MainMS.ToolTip = null;
@@ -153,8 +156,8 @@
             MainSC.Panel2.BackColor = Color.FromArgb(35, 35, 35);
             MainSC.Panel2.Controls.Add(RhsSC);
             MainSC.Panel2.ForeColor = Color.FromArgb(220, 220, 220);
-            MainSC.Size = new Size(676, 816);
-            MainSC.SplitterDistance = 222;
+            MainSC.Size = new Size(913, 858);
+            MainSC.SplitterDistance = 299;
             MainSC.TabIndex = 3;
             // 
             // ListboxPN
@@ -169,7 +172,7 @@
             ListboxPN.Margin = new Padding(2, 3, 2, 3);
             ListboxPN.Name = "ListboxPN";
             ListboxPN.Padding = new Padding(3);
-            ListboxPN.Size = new Size(222, 781);
+            ListboxPN.Size = new Size(299, 823);
             ListboxPN.TabIndex = 3;
             // 
             // MainLB
@@ -182,7 +185,7 @@
             MainLB.FormattingEnabled = true;
             MainLB.Location = new Point(3, 3);
             MainLB.Name = "MainLB";
-            MainLB.Size = new Size(214, 773);
+            MainLB.Size = new Size(291, 815);
             MainLB.TabIndex = 2;
             MainLB.SelectedIndexChanged += MainLB_SelectedIndexChanged;
             MainLB.SelectedValueChanged += MainLB_SelectedValueChanged;
@@ -195,12 +198,13 @@
             flowLayoutPanel1.Controls.Add(LoadDatsBT);
             flowLayoutPanel1.Controls.Add(PriorityUpBT);
             flowLayoutPanel1.Controls.Add(PriorityDownBT);
+            flowLayoutPanel1.Controls.Add(label11);
             flowLayoutPanel1.Dock = DockStyle.Bottom;
             flowLayoutPanel1.FlowDirection = FlowDirection.RightToLeft;
             flowLayoutPanel1.ForeColor = Color.FromArgb(220, 220, 220);
-            flowLayoutPanel1.Location = new Point(0, 781);
+            flowLayoutPanel1.Location = new Point(0, 823);
             flowLayoutPanel1.Name = "flowLayoutPanel1";
-            flowLayoutPanel1.Size = new Size(222, 35);
+            flowLayoutPanel1.Size = new Size(299, 35);
             flowLayoutPanel1.TabIndex = 1;
             // 
             // LoadDatsBT
@@ -215,15 +219,15 @@
             LoadDatsBT.FlatAppearance.MouseOverBackColor = Color.FromArgb(0, 102, 215);
             LoadDatsBT.FlatStyle = FlatStyle.Flat;
             LoadDatsBT.ForeColor = Color.FromArgb(240, 240, 240);
-            LoadDatsBT.Location = new Point(140, 3);
+            LoadDatsBT.Location = new Point(217, 3);
             LoadDatsBT.Name = "LoadDatsBT";
             LoadDatsBT.Size = new Size(79, 29);
             LoadDatsBT.TabIndex = 0;
             LoadDatsBT.Text = "Load Dats";
             LoadDatsBT.ToolTip = null;
             LoadDatsBT.ToolTipImage = null;
-            LoadDatsBT.ToolTipText = null;
-            LoadDatsBT.ToolTipTitle = null;
+            LoadDatsBT.ToolTipText = "Load Dats";
+            LoadDatsBT.ToolTipTitle = "Load Dats to be merged";
             LoadDatsBT.UseVisualStyleBackColor = false;
             LoadDatsBT.Click += LoadDatsBT_Click;
             // 
@@ -240,7 +244,7 @@
             PriorityUpBT.FlatStyle = FlatStyle.Flat;
             PriorityUpBT.ForeColor = Color.FromArgb(240, 240, 240);
             PriorityUpBT.Image = Properties.Resources.arrow_090;
-            PriorityUpBT.Location = new Point(105, 3);
+            PriorityUpBT.Location = new Point(182, 3);
             PriorityUpBT.Name = "PriorityUpBT";
             PriorityUpBT.Size = new Size(29, 29);
             PriorityUpBT.TabIndex = 1;
@@ -264,7 +268,7 @@
             PriorityDownBT.FlatStyle = FlatStyle.Flat;
             PriorityDownBT.ForeColor = Color.FromArgb(240, 240, 240);
             PriorityDownBT.Image = Properties.Resources.arrow_270;
-            PriorityDownBT.Location = new Point(70, 3);
+            PriorityDownBT.Location = new Point(147, 3);
             PriorityDownBT.Name = "PriorityDownBT";
             PriorityDownBT.Size = new Size(29, 29);
             PriorityDownBT.TabIndex = 2;
@@ -274,6 +278,52 @@
             PriorityDownBT.ToolTipTitle = "Move Prioriry Down";
             PriorityDownBT.UseVisualStyleBackColor = false;
             PriorityDownBT.Click += PriorityDownBT_Click;
+            // 
+            // label11
+            // 
+            label11.AutoSize = true;
+            label11.Font = new Font("Segoe UI", 9.75F);
+            label11.FontStyle = FontStyle.Regular;
+            label11.ForeColor = Color.FromArgb(220, 220, 220);
+            label11.Location = new Point(24, 8);
+            label11.Margin = new Padding(3, 8, 3, 0);
+            label11.Name = "label11";
+            label11.ScaleFont = 100;
+            label11.Size = new Size(117, 17);
+            label11.TabIndex = 3;
+            label11.Text = "(Topmost=Priority)";
+            label11.TextAlign = ContentAlignment.MiddleRight;
+            label11.ToolTip = MainTT;
+            label11.ToolTipHorizontalAlignment = HorizontalAlignment.Right;
+            label11.ToolTipImage = null;
+            label11.ToolTipText = null;
+            label11.ToolTipTitle = null;
+            // 
+            // MainTT
+            // 
+            MainTT.ActiveControl = null;
+            MainTT.AutoPopDelay = 5000;
+            MainTT.AutoTitleLength = 30;
+            MainTT.BackColor = SystemColors.Control;
+            MainTT.BorderColor = SystemColors.ActiveBorder;
+            MainTT.DefaultImageSize = new Size(16, 16);
+            MainTT.Font = new Font("Microsoft Sans Serif", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            MainTT.ForeColor = SystemColors.ControlText;
+            MainTT.GrowWidthForHeader = true;
+            MainTT.Image = (Image)resources.GetObject("MainTT.Image");
+            MainTT.InitialDelay = 1500;
+            MainTT.MaxHeight = 0;
+            MainTT.Offset = new Point(0, 0);
+            MainTT.OwnerDraw = true;
+            MainTT.PanelPadding = 4;
+            MainTT.ReshowDelay = 100;
+            MainTT.ResizeImage = true;
+            MainTT.ShowFor = 0;
+            MainTT.TitleBackground = SystemColors.ControlLight;
+            MainTT.TitleForeground = SystemColors.InfoText;
+            MainTT.ToolTipText = "Information here..";
+            MainTT.ToolTipTitle = "Info";
+            MainTT.Width = 256;
             // 
             // RhsSC
             // 
@@ -299,8 +349,8 @@
             RhsSC.Panel2.Controls.Add(flowLayoutPanel2);
             RhsSC.Panel2.ForeColor = Color.FromArgb(220, 220, 220);
             RhsSC.Panel2.Padding = new Padding(6);
-            RhsSC.Size = new Size(450, 816);
-            RhsSC.SplitterDistance = 220;
+            RhsSC.Size = new Size(610, 858);
+            RhsSC.SplitterDistance = 231;
             RhsSC.TabIndex = 0;
             // 
             // PgPN
@@ -314,7 +364,7 @@
             PgPN.Margin = new Padding(2);
             PgPN.Name = "PgPN";
             PgPN.Padding = new Padding(3);
-            PgPN.Size = new Size(450, 191);
+            PgPN.Size = new Size(610, 202);
             PgPN.TabIndex = 2;
             // 
             // MainPG
@@ -330,7 +380,7 @@
             MainPG.Location = new Point(3, 3);
             MainPG.Margin = new Padding(5);
             MainPG.Name = "MainPG";
-            MainPG.Size = new Size(444, 185);
+            MainPG.Size = new Size(604, 196);
             MainPG.TabIndex = 0;
             MainPG.ToolbarVisible = false;
             MainPG.ViewBackColor = Color.FromArgb(30, 30, 30);
@@ -353,29 +403,47 @@
             groupBox2.BorderColor = Color.FromArgb(100, 100, 100);
             groupBox2.BorderStyle = System.Drawing.Drawing2D.DashStyle.Solid;
             groupBox2.BorderThickness = 1;
+            groupBox2.Controls.Add(AddSetupElementChB);
             groupBox2.Controls.Add(AlsoTagDescChB);
             groupBox2.Controls.Add(OpenFileAfterCreatedChB);
             groupBox2.Controls.Add(label7);
             groupBox2.Controls.Add(TagPositionCB);
             groupBox2.Dock = DockStyle.Top;
             groupBox2.ForeColor = Color.FromArgb(220, 220, 220);
-            groupBox2.Location = new Point(6, 379);
+            groupBox2.Location = new Point(6, 401);
             groupBox2.Margin = new Padding(2);
             groupBox2.Name = "groupBox2";
             groupBox2.Padding = new Padding(2);
-            groupBox2.Size = new Size(438, 112);
+            groupBox2.Size = new Size(598, 143);
             groupBox2.TabIndex = 3;
             groupBox2.TabStop = false;
             groupBox2.Text = "Output";
             groupBox2.TitleColor = Color.FromArgb(220, 220, 220);
             // 
+            // AddSetupElementChB
+            // 
+            AddSetupElementChB.AutoSize = true;
+            AddSetupElementChB.Location = new Point(120, 112);
+            AddSetupElementChB.Name = "AddSetupElementChB";
+            AddSetupElementChB.OverrideTheme = false;
+            AddSetupElementChB.Size = new Size(201, 21);
+            AddSetupElementChB.TabIndex = 9;
+            AddSetupElementChB.Text = "Add Setup Element to Header";
+            AddSetupElementChB.ToolTip = MainTT;
+            AddSetupElementChB.ToolTipHorizontalAlignment = HorizontalAlignment.Right;
+            AddSetupElementChB.ToolTipImage = null;
+            AddSetupElementChB.ToolTipText = "True = you can re-open the merged dat in MergeDatRom. False = you can use it in Retool.";
+            AddSetupElementChB.ToolTipTitle = "Add Setup Element to Header";
+            AddSetupElementChB.UseVisualStyleBackColor = true;
+            // 
             // AlsoTagDescChB
             // 
             AlsoTagDescChB.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
+            AlsoTagDescChB.AutoSize = true;
             AlsoTagDescChB.Location = new Point(120, 52);
             AlsoTagDescChB.Name = "AlsoTagDescChB";
             AlsoTagDescChB.OverrideTheme = false;
-            AlsoTagDescChB.Size = new Size(307, 24);
+            AlsoTagDescChB.Size = new Size(147, 21);
             AlsoTagDescChB.TabIndex = 8;
             AlsoTagDescChB.Tag = "";
             AlsoTagDescChB.Text = "Also Tag Description";
@@ -383,48 +451,23 @@
             AlsoTagDescChB.ToolTipHorizontalAlignment = HorizontalAlignment.Right;
             AlsoTagDescChB.ToolTipImage = null;
             AlsoTagDescChB.ToolTipText = "If a tagging Method is selected whether to also tag the description element";
-            AlsoTagDescChB.ToolTipTitle = null;
+            AlsoTagDescChB.ToolTipTitle = "Also Tag Description";
             AlsoTagDescChB.UseVisualStyleBackColor = true;
-            // 
-            // MainTT
-            // 
-            MainTT.ActiveControl = null;
-            MainTT.AutoPopDelay = 5000;
-            MainTT.AutoTitleLength = 30;
-            MainTT.BackColor = SystemColors.Control;
-            MainTT.BorderColor = SystemColors.ActiveBorder;
-            MainTT.DefaultImageSize = new Size(16, 16);
-            MainTT.Font = new Font("Microsoft Sans Serif", 8.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            MainTT.ForeColor = SystemColors.ControlText;
-            MainTT.GrowWidthForHeader = true;
-            MainTT.Image = (Image)resources.GetObject("MainTT.Image");
-            MainTT.InitialDelay = 1500;
-            MainTT.MaxHeight = 0;
-            MainTT.Offset = new Point(0, 0);
-            MainTT.OwnerDraw = true;
-            MainTT.PanelPadding = 4;
-            MainTT.ReshowDelay = 100;
-            MainTT.ResizeImage = true;
-            MainTT.ShowFor = 5000;
-            MainTT.TitleBackground = SystemColors.ControlLight;
-            MainTT.TitleForeground = SystemColors.InfoText;
-            MainTT.ToolTipText = "Information here..";
-            MainTT.ToolTipTitle = "Info";
-            MainTT.Width = 128;
             // 
             // OpenFileAfterCreatedChB
             // 
+            OpenFileAfterCreatedChB.AutoSize = true;
             OpenFileAfterCreatedChB.Location = new Point(120, 82);
             OpenFileAfterCreatedChB.Name = "OpenFileAfterCreatedChB";
             OpenFileAfterCreatedChB.OverrideTheme = false;
-            OpenFileAfterCreatedChB.Size = new Size(305, 24);
+            OpenFileAfterCreatedChB.Size = new Size(159, 21);
             OpenFileAfterCreatedChB.TabIndex = 5;
             OpenFileAfterCreatedChB.Text = "Open file after created";
             OpenFileAfterCreatedChB.ToolTip = MainTT;
             OpenFileAfterCreatedChB.ToolTipHorizontalAlignment = HorizontalAlignment.Right;
             OpenFileAfterCreatedChB.ToolTipImage = null;
-            OpenFileAfterCreatedChB.ToolTipText = null;
-            OpenFileAfterCreatedChB.ToolTipTitle = null;
+            OpenFileAfterCreatedChB.ToolTipText = "OPens it in your default text editor";
+            OpenFileAfterCreatedChB.ToolTipTitle = "Open file after created";
             OpenFileAfterCreatedChB.UseVisualStyleBackColor = true;
             // 
             // label7
@@ -443,8 +486,8 @@
             label7.ToolTip = MainTT;
             label7.ToolTipHorizontalAlignment = HorizontalAlignment.Right;
             label7.ToolTipImage = null;
-            label7.ToolTipText = null;
-            label7.ToolTipTitle = null;
+            label7.ToolTipText = "Where to put the Tag in the merged dat game name, as per Method.TagAll ";
+            label7.ToolTipTitle = "Tag Position";
             // 
             // TagPositionCB
             // 
@@ -462,7 +505,7 @@
             TagPositionCB.Margin = new Padding(2);
             TagPositionCB.Name = "TagPositionCB";
             TagPositionCB.SelectedColor = SystemColors.Highlight;
-            TagPositionCB.Size = new Size(304, 25);
+            TagPositionCB.Size = new Size(464, 25);
             TagPositionCB.TabIndex = 4;
             TagPositionCB.TextEmphasisColor = Color.White;
             TagPositionCB.TextEmphasisFont = new Font("Segoe UI", 9.75F, FontStyle.Bold);
@@ -485,9 +528,9 @@
             groupBox3.Controls.Add(StripTagsChB);
             groupBox3.Dock = DockStyle.Top;
             groupBox3.ForeColor = Color.FromArgb(220, 220, 220);
-            groupBox3.Location = new Point(6, 173);
+            groupBox3.Location = new Point(6, 195);
             groupBox3.Name = "groupBox3";
-            groupBox3.Size = new Size(438, 206);
+            groupBox3.Size = new Size(598, 206);
             groupBox3.TabIndex = 4;
             groupBox3.TabStop = false;
             groupBox3.Text = "Merge Settings";
@@ -496,17 +539,18 @@
             // PreserveMultiDiscFormatsChB
             // 
             PreserveMultiDiscFormatsChB.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
+            PreserveMultiDiscFormatsChB.AutoSize = true;
             PreserveMultiDiscFormatsChB.Location = new Point(130, 177);
             PreserveMultiDiscFormatsChB.Name = "PreserveMultiDiscFormatsChB";
             PreserveMultiDiscFormatsChB.OverrideTheme = false;
-            PreserveMultiDiscFormatsChB.Size = new Size(294, 24);
+            PreserveMultiDiscFormatsChB.Size = new Size(189, 21);
             PreserveMultiDiscFormatsChB.TabIndex = 17;
             PreserveMultiDiscFormatsChB.Text = "Preserve Multi-disc Formats";
             PreserveMultiDiscFormatsChB.ToolTip = MainTT;
             PreserveMultiDiscFormatsChB.ToolTipHorizontalAlignment = HorizontalAlignment.Right;
             PreserveMultiDiscFormatsChB.ToolTipImage = null;
-            PreserveMultiDiscFormatsChB.ToolTipText = null;
-            PreserveMultiDiscFormatsChB.ToolTipTitle = null;
+            PreserveMultiDiscFormatsChB.ToolTipText = "Include all disks/sides/parts as separate game files (needed for emulators). ";
+            PreserveMultiDiscFormatsChB.ToolTipTitle = "Preserve multi-disc formats";
             PreserveMultiDiscFormatsChB.UseVisualStyleBackColor = true;
             // 
             // label10
@@ -524,8 +568,8 @@
             label10.ToolTip = MainTT;
             label10.ToolTipHorizontalAlignment = HorizontalAlignment.Right;
             label10.ToolTipImage = null;
-            label10.ToolTipText = null;
-            label10.ToolTipTitle = null;
+            label10.ToolTipText = "A comma separated list of tags that is found in the game name, will be excluded form the merge results.";
+            label10.ToolTipTitle = "Exclude Tags";
             // 
             // label9
             // 
@@ -542,8 +586,8 @@
             label9.ToolTip = MainTT;
             label9.ToolTipHorizontalAlignment = HorizontalAlignment.Right;
             label9.ToolTipImage = null;
-            label9.ToolTipText = null;
-            label9.ToolTipTitle = null;
+            label9.ToolTipText = "Like exclude tags, but indicates game/rom should be included in final merged dat.";
+            label9.ToolTipTitle = "Include Tags";
             // 
             // ExcludeTagsTB
             // 
@@ -557,7 +601,7 @@
             ExcludeTagsTB.Location = new Point(130, 55);
             ExcludeTagsTB.Name = "ExcludeTagsTB";
             ExcludeTagsTB.ScaleFont = 100;
-            ExcludeTagsTB.Size = new Size(294, 25);
+            ExcludeTagsTB.Size = new Size(454, 25);
             ExcludeTagsTB.TabIndex = 14;
             // 
             // IncludeTagsTB
@@ -572,15 +616,16 @@
             IncludeTagsTB.Location = new Point(130, 86);
             IncludeTagsTB.Name = "IncludeTagsTB";
             IncludeTagsTB.ScaleFont = 100;
-            IncludeTagsTB.Size = new Size(294, 25);
+            IncludeTagsTB.Size = new Size(454, 25);
             IncludeTagsTB.TabIndex = 13;
             // 
             // UseTagBracketChB
             // 
+            UseTagBracketChB.AutoSize = true;
             UseTagBracketChB.Location = new Point(192, 147);
             UseTagBracketChB.Name = "UseTagBracketChB";
             UseTagBracketChB.OverrideTheme = false;
-            UseTagBracketChB.Size = new Size(62, 24);
+            UseTagBracketChB.Size = new Size(49, 21);
             UseTagBracketChB.TabIndex = 11;
             UseTagBracketChB.Text = "\"( )\"";
             UseTagBracketChB.ToolTip = MainTT;
@@ -605,15 +650,16 @@
             label8.ToolTip = MainTT;
             label8.ToolTipHorizontalAlignment = HorizontalAlignment.Right;
             label8.ToolTipImage = null;
-            label8.ToolTipText = null;
-            label8.ToolTipTitle = null;
+            label8.ToolTipText = "Whether to do the above on bracketed tags - \"( )\" eg \"(NL)\" or on square brackets - \"[ ]\" eg \"[BASIC]\"";
+            label8.ToolTipTitle = "Tags to filter";
             // 
             // UseTagSquareChB
             // 
+            UseTagSquareChB.AutoSize = true;
             UseTagSquareChB.Location = new Point(130, 147);
             UseTagSquareChB.Name = "UseTagSquareChB";
             UseTagSquareChB.OverrideTheme = false;
-            UseTagSquareChB.Size = new Size(56, 24);
+            UseTagSquareChB.Size = new Size(49, 21);
             UseTagSquareChB.TabIndex = 10;
             UseTagSquareChB.Text = "\"[ ]\"";
             UseTagSquareChB.ToolTip = MainTT;
@@ -639,8 +685,8 @@
             label6.ToolTip = MainTT;
             label6.ToolTipHorizontalAlignment = HorizontalAlignment.Right;
             label6.ToolTipImage = null;
-            label6.ToolTipText = null;
-            label6.ToolTipTitle = null;
+            label6.ToolTipText = "Keep Priority: keeps the highest priority game entry, TagAll: keeps and tags all duplicates, TagAllButPriority: Keeps and Tags all, but doesn't tag priority";
+            label6.ToolTipTitle = "Merge Method";
             // 
             // MethodCB
             // 
@@ -658,7 +704,7 @@
             MethodCB.Margin = new Padding(2);
             MethodCB.Name = "MethodCB";
             MethodCB.SelectedColor = SystemColors.Highlight;
-            MethodCB.Size = new Size(294, 25);
+            MethodCB.Size = new Size(454, 25);
             MethodCB.TabIndex = 1;
             MethodCB.TextEmphasisColor = Color.White;
             MethodCB.TextEmphasisFont = new Font("Segoe UI", 9.75F, FontStyle.Bold);
@@ -666,17 +712,18 @@
             // StripTagsChB
             // 
             StripTagsChB.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
+            StripTagsChB.AutoSize = true;
             StripTagsChB.Location = new Point(130, 117);
             StripTagsChB.Name = "StripTagsChB";
             StripTagsChB.OverrideTheme = false;
-            StripTagsChB.Size = new Size(297, 24);
+            StripTagsChB.Size = new Size(203, 21);
             StripTagsChB.TabIndex = 9;
             StripTagsChB.Text = "Strip Tags for Game Grouping\r\n";
             StripTagsChB.ToolTip = MainTT;
             StripTagsChB.ToolTipHorizontalAlignment = HorizontalAlignment.Right;
             StripTagsChB.ToolTipImage = null;
             StripTagsChB.ToolTipText = "Use to consdier just game names without the tags (useful with TOSEC). Accomodates different dates.";
-            StripTagsChB.ToolTipTitle = null;
+            StripTagsChB.ToolTipTitle = "Strip Tags for game grouping";
             StripTagsChB.UseVisualStyleBackColor = true;
             // 
             // WarningLB
@@ -684,11 +731,11 @@
             WarningLB.Dock = DockStyle.Bottom;
             WarningLB.Image = Properties.Resources.exclamation__frame;
             WarningLB.ImageAlign = ContentAlignment.MiddleRight;
-            WarningLB.Location = new Point(6, 524);
+            WarningLB.Location = new Point(6, 555);
             WarningLB.Margin = new Padding(2, 0, 2, 0);
             WarningLB.Name = "WarningLB";
             WarningLB.Padding = new Padding(2, 2, 2, 6);
-            WarningLB.Size = new Size(438, 27);
+            WarningLB.Size = new Size(598, 27);
             WarningLB.TabIndex = 2;
             WarningLB.Text = "Cannot proceed - all Dats must have a unique tag      ";
             WarningLB.TextAlign = ContentAlignment.MiddleRight;
@@ -699,6 +746,7 @@
             groupBox1.BorderColor = Color.FromArgb(100, 100, 100);
             groupBox1.BorderStyle = System.Drawing.Drawing2D.DashStyle.Solid;
             groupBox1.BorderThickness = 1;
+            groupBox1.Controls.Add(AutoPopulateHeaderChB);
             groupBox1.Controls.Add(label5);
             groupBox1.Controls.Add(MergeDatCategoryTB);
             groupBox1.Controls.Add(label4);
@@ -713,11 +761,27 @@
             groupBox1.Margin = new Padding(2);
             groupBox1.Name = "groupBox1";
             groupBox1.Padding = new Padding(2);
-            groupBox1.Size = new Size(438, 167);
+            groupBox1.Size = new Size(598, 189);
             groupBox1.TabIndex = 1;
             groupBox1.TabStop = false;
             groupBox1.Text = "Merged Dat Header Details";
             groupBox1.TitleColor = Color.FromArgb(220, 220, 220);
+            // 
+            // AutoPopulateHeaderChB
+            // 
+            AutoPopulateHeaderChB.AutoSize = true;
+            AutoPopulateHeaderChB.Location = new Point(117, 158);
+            AutoPopulateHeaderChB.Name = "AutoPopulateHeaderChB";
+            AutoPopulateHeaderChB.OverrideTheme = false;
+            AutoPopulateHeaderChB.Size = new Size(109, 21);
+            AutoPopulateHeaderChB.TabIndex = 10;
+            AutoPopulateHeaderChB.Text = "Auto Populate";
+            AutoPopulateHeaderChB.ToolTip = MainTT;
+            AutoPopulateHeaderChB.ToolTipHorizontalAlignment = HorizontalAlignment.Right;
+            AutoPopulateHeaderChB.ToolTipImage = null;
+            AutoPopulateHeaderChB.ToolTipText = "Autopopulates Name and Description from the priority Dat";
+            AutoPopulateHeaderChB.ToolTipTitle = "Auto Populate Header";
+            AutoPopulateHeaderChB.UseVisualStyleBackColor = true;
             // 
             // label5
             // 
@@ -734,8 +798,8 @@
             label5.ToolTip = MainTT;
             label5.ToolTipHorizontalAlignment = HorizontalAlignment.Right;
             label5.ToolTipImage = null;
-            label5.ToolTipText = null;
-            label5.ToolTipTitle = null;
+            label5.ToolTipText = "Category to place in the merged dat header";
+            label5.ToolTipTitle = "Header Category";
             // 
             // MergeDatCategoryTB
             // 
@@ -749,7 +813,7 @@
             MergeDatCategoryTB.Location = new Point(117, 123);
             MergeDatCategoryTB.Name = "MergeDatCategoryTB";
             MergeDatCategoryTB.ScaleFont = 100;
-            MergeDatCategoryTB.Size = new Size(307, 29);
+            MergeDatCategoryTB.Size = new Size(467, 29);
             MergeDatCategoryTB.TabIndex = 6;
             // 
             // label4
@@ -768,8 +832,8 @@
             label4.ToolTip = MainTT;
             label4.ToolTipHorizontalAlignment = HorizontalAlignment.Right;
             label4.ToolTipImage = null;
-            label4.ToolTipText = null;
-            label4.ToolTipTitle = null;
+            label4.ToolTipText = "Author to place in the merged dat header";
+            label4.ToolTipTitle = "Header Author";
             // 
             // MergeDatAuthorTB
             // 
@@ -784,7 +848,7 @@
             MergeDatAuthorTB.Margin = new Padding(2);
             MergeDatAuthorTB.Name = "MergeDatAuthorTB";
             MergeDatAuthorTB.ScaleFont = 100;
-            MergeDatAuthorTB.Size = new Size(307, 29);
+            MergeDatAuthorTB.Size = new Size(467, 29);
             MergeDatAuthorTB.TabIndex = 4;
             // 
             // label3
@@ -803,8 +867,8 @@
             label3.ToolTip = MainTT;
             label3.ToolTipHorizontalAlignment = HorizontalAlignment.Right;
             label3.ToolTipImage = null;
-            label3.ToolTipText = null;
-            label3.ToolTipTitle = null;
+            label3.ToolTipText = "The Description to place in the merged dat";
+            label3.ToolTipTitle = "Header Description";
             // 
             // label2
             // 
@@ -822,8 +886,8 @@
             label2.ToolTip = MainTT;
             label2.ToolTipHorizontalAlignment = HorizontalAlignment.Right;
             label2.ToolTipImage = null;
-            label2.ToolTipText = null;
-            label2.ToolTipTitle = null;
+            label2.ToolTipText = "The Name to place in the merged dat header";
+            label2.ToolTipTitle = "Header Name";
             // 
             // MergeDatDescTB
             // 
@@ -838,7 +902,7 @@
             MergeDatDescTB.Margin = new Padding(2);
             MergeDatDescTB.Name = "MergeDatDescTB";
             MergeDatDescTB.ScaleFont = 100;
-            MergeDatDescTB.Size = new Size(307, 29);
+            MergeDatDescTB.Size = new Size(467, 29);
             MergeDatDescTB.TabIndex = 1;
             // 
             // MergeDatNameTB
@@ -854,7 +918,7 @@
             MergeDatNameTB.Margin = new Padding(2);
             MergeDatNameTB.Name = "MergeDatNameTB";
             MergeDatNameTB.ScaleFont = 100;
-            MergeDatNameTB.Size = new Size(307, 29);
+            MergeDatNameTB.Size = new Size(467, 29);
             MergeDatNameTB.TabIndex = 0;
             // 
             // flowLayoutPanel2
@@ -868,9 +932,9 @@
             flowLayoutPanel2.Dock = DockStyle.Bottom;
             flowLayoutPanel2.FlowDirection = FlowDirection.RightToLeft;
             flowLayoutPanel2.ForeColor = Color.FromArgb(220, 220, 220);
-            flowLayoutPanel2.Location = new Point(6, 551);
+            flowLayoutPanel2.Location = new Point(6, 582);
             flowLayoutPanel2.Name = "flowLayoutPanel2";
-            flowLayoutPanel2.Size = new Size(438, 35);
+            flowLayoutPanel2.Size = new Size(598, 35);
             flowLayoutPanel2.TabIndex = 0;
             // 
             // MergeBT
@@ -886,15 +950,15 @@
             MergeBT.FlatAppearance.MouseOverBackColor = Color.FromArgb(0, 102, 215);
             MergeBT.FlatStyle = FlatStyle.Flat;
             MergeBT.ForeColor = Color.FromArgb(240, 240, 240);
-            MergeBT.Location = new Point(346, 3);
+            MergeBT.Location = new Point(506, 3);
             MergeBT.Name = "MergeBT";
             MergeBT.Size = new Size(89, 29);
             MergeBT.TabIndex = 1;
             MergeBT.Text = "Merge Dats";
             MergeBT.ToolTip = null;
             MergeBT.ToolTipImage = null;
-            MergeBT.ToolTipText = null;
-            MergeBT.ToolTipTitle = null;
+            MergeBT.ToolTipText = "Do the merge. Asks you where to save it to.";
+            MergeBT.ToolTipTitle = "Merge Dats";
             MergeBT.UseVisualStyleBackColor = false;
             MergeBT.Click += MergeBT_Click;
             // 
@@ -911,15 +975,15 @@
             LoadSetupBT.FlatAppearance.MouseOverBackColor = Color.FromArgb(0, 102, 215);
             LoadSetupBT.FlatStyle = FlatStyle.Flat;
             LoadSetupBT.ForeColor = Color.FromArgb(240, 240, 240);
-            LoadSetupBT.Location = new Point(251, 3);
+            LoadSetupBT.Location = new Point(411, 3);
             LoadSetupBT.Name = "LoadSetupBT";
             LoadSetupBT.Size = new Size(89, 29);
             LoadSetupBT.TabIndex = 2;
             LoadSetupBT.Text = "Load Setup";
             LoadSetupBT.ToolTip = MainTT;
             LoadSetupBT.ToolTipImage = null;
-            LoadSetupBT.ToolTipText = null;
-            LoadSetupBT.ToolTipTitle = null;
+            LoadSetupBT.ToolTipText = "This will restore all the settings and the documents (if they are in the same file locations they were when you merged them last) if you re-open the merged dat";
+            LoadSetupBT.ToolTipTitle = "Load Setup";
             LoadSetupBT.UseVisualStyleBackColor = false;
             LoadSetupBT.Click += LoadSetupBT_Click;
             // 
@@ -936,15 +1000,15 @@
             SetDefaultsBT.FlatAppearance.MouseOverBackColor = Color.FromArgb(0, 102, 215);
             SetDefaultsBT.FlatStyle = FlatStyle.Flat;
             SetDefaultsBT.ForeColor = Color.FromArgb(240, 240, 240);
-            SetDefaultsBT.Location = new Point(156, 3);
+            SetDefaultsBT.Location = new Point(316, 3);
             SetDefaultsBT.Name = "SetDefaultsBT";
             SetDefaultsBT.Size = new Size(89, 29);
             SetDefaultsBT.TabIndex = 3;
             SetDefaultsBT.Text = "Set Defaults";
             SetDefaultsBT.ToolTip = MainTT;
             SetDefaultsBT.ToolTipImage = null;
-            SetDefaultsBT.ToolTipText = null;
-            SetDefaultsBT.ToolTipTitle = null;
+            SetDefaultsBT.ToolTipText = "Captures the header info and also merge settings as a default that loads on app startup. ";
+            SetDefaultsBT.ToolTipTitle = "Set Defaults";
             SetDefaultsBT.UseVisualStyleBackColor = false;
             SetDefaultsBT.Click += SetDefaultsBT_Click;
             // 
@@ -952,7 +1016,7 @@
             // 
             AutoScaleDimensions = new SizeF(7F, 17F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(684, 849);
+            ClientSize = new Size(921, 891);
             Controls.Add(MainSC);
             Controls.Add(MainMS);
             DarkMode = true;
@@ -978,6 +1042,7 @@
             MainSC.ResumeLayout(false);
             ListboxPN.ResumeLayout(false);
             flowLayoutPanel1.ResumeLayout(false);
+            flowLayoutPanel1.PerformLayout();
             RhsSC.Panel1.ResumeLayout(false);
             RhsSC.Panel1.PerformLayout();
             RhsSC.Panel2.ResumeLayout(false);
@@ -986,6 +1051,7 @@
             RhsSC.ResumeLayout(false);
             PgPN.ResumeLayout(false);
             groupBox2.ResumeLayout(false);
+            groupBox2.PerformLayout();
             groupBox3.ResumeLayout(false);
             groupBox3.PerformLayout();
             groupBox1.ResumeLayout(false);
@@ -1045,5 +1111,8 @@
         private stigzler.Winforms.Base.UIElements.TextBox ExcludeTagsTB;
         private stigzler.Winforms.Base.UIElements.TextBox IncludeTagsTB;
         private stigzler.Winforms.Base.UIElements.CheckBox PreserveMultiDiscFormatsChB;
+        private stigzler.Winforms.Base.UIElements.CheckBox AddSetupElementChB;
+        private stigzler.Winforms.Base.UIElements.CheckBox AutoPopulateHeaderChB;
+        private stigzler.Winforms.Base.UIElements.Label label11;
     }
 }

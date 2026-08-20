@@ -201,7 +201,7 @@ namespace MergeDatRom
 
             bool success = _datMetadataService.CreateMergedDatFile(sortedNameGroups, sfd.FileName, MergeDatNameTB.Text,
                 MergeDatDescTB.Text, MergeDatAuthorTB.Text, MergeDatCategoryTB.Text,
-                _datMetadatas, mergeSettings);
+                _datMetadatas, mergeSettings, AddSetupElementChB.Checked);
 
             if (success)
             {
@@ -385,6 +385,12 @@ namespace MergeDatRom
             {
                 MainPG.SelectedObject = null;
             }
+
+            if (AutoPopulateHeaderChB.Checked)
+            {
+                MergeDatNameTB.Text = datmetadatas.First().DatName;
+                MergeDatDescTB.Text = datmetadatas.First().DatDescription;
+            }
         }
 
         private void LoadDatsBT_Click(object sender, EventArgs e)
@@ -433,6 +439,8 @@ namespace MergeDatRom
             UseTagSquareChB.Checked = Properties.Settings.Default.IncludeSquareTags;
             MethodCB.Text = Properties.Settings.Default.DefaultMethod;
             TagPositionCB.Text = Properties.Settings.Default.DefaultTagPosition;
+            AddSetupElementChB.Checked = Properties.Settings.Default.AddSetupElement;
+            AutoPopulateHeaderChB.Checked = Properties.Settings.Default.AutoPopulateDatHeader;
 
             var version = System.Reflection.Assembly.GetExecutingAssembly().GetName().Version;
             VersionLB.Text = $"V{version.Major}.{version.Minor}.{version.Build}";
@@ -494,6 +502,8 @@ namespace MergeDatRom
             Properties.Settings.Default.IncludeBracketTags = UseTagBracketChB.Checked;
             Properties.Settings.Default.DefaultMethod = MethodCB.Text;
             Properties.Settings.Default.DefaultTagPosition = TagPositionCB.Text;
+            Properties.Settings.Default.AddSetupElement = AddSetupElementChB.Checked;
+            Properties.Settings.Default.AutoPopulateDatHeader = AutoPopulateHeaderChB.Checked;
         }
 
         private void MoveSelectedDat(int direction)
